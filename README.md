@@ -11,14 +11,7 @@ Claude liest zu Beginn jeder Sitzung `Gedächtnis/Kern.md` (über `CLAUDE.md`), 
 1. **Vault öffnen:** Repo klonen und in Obsidian „Ordner als Vault öffnen“ wählen. Tagesnotizen, Vorlagen und Bases sind schon eingestellt.
 2. **Synchronisieren:** In Obsidian das Community-Plugin *Obsidian Git* installieren (automatisch committen, pushen und pullen), damit Claude und Obsidian denselben Stand sehen.
 3. **Claude Code im Vault starten:** `claude` in diesem Ordner. `CLAUDE.md` und die Skills `gedaechtnis` und `trading-journal` laden von selbst.
-4. **Day-Trader-Skills installieren**, in Claude Code:
-
-   ```
-   /plugin marketplace add Jakeschincariol/day-trader-skill
-   /plugin install day-trader-skill@day-trader-skill
-   ```
-
-   Die Befehle heißen dann `/day-trader-skill:trader-scanner` usw. Sie brauchen Python 3.8 oder neuer und nichts zum Installieren.
+4. **Day-Trader-Skills:** liegen schon in `.claude/skills/trader-*`, kein Plugin nötig (in Team-Umgebungen sind Plugins oft gesperrt). Die Befehle heißen `/trader-scanner`, `/trader-news` usw. Sie brauchen Python 3.8 oder neuer und nichts zum Installieren.
 5. **SEC-Kennung:** In `trader/config.json` `sec_user_agent` auf Name und E-Mail setzen (verlangt die SEC für News und Earnings), oder die Umgebungsvariable `SEC_USER_AGENT`.
 6. **Broker, erst wenn gewünscht:** Alpaca-Paper-Konto anlegen und den Alpaca-MCP-Server in Claude verbinden. Schlüssel nur in Umgebungsvariablen, nie im Chat oder im Vault. In Claude für das Order-Werkzeug „Needs approval“ einstellen, nie „Always allow“.
 
@@ -51,8 +44,8 @@ Tagesnotizen/             eine Notiz je Tag
 Vorlagen/                 Tagesnotiz, Notiz, Person, Projekt, Entscheidung
 Trading/                  Regeln, Übersicht, Trades.base, Trades/, Statistik.md
 trader/                   Daten der Day-Trader-Skills (in Obsidian ausgeblendet)
-.claude/skills/           gedaechtnis, trading-journal
-.claude/tests/            Tests fürs Journal
+.claude/skills/           gedaechtnis, trading-journal, trader-* (Day-Trader-Skills)
+.claude/tests/            Tests fürs Journal, day-trader/ für die Skills
 ```
 
 Von `trader/` sind nur `config.json`, `portfolio.json`, `alerts.json` und die Protokolle in `state/` in Git, damit Tageslimits auch über Sitzungen hinweg gelten. Der Rest sind Zwischenstände.
@@ -60,5 +53,12 @@ Von `trader/` sind nur `config.json`, `portfolio.json`, `alerts.json` und die Pr
 ## Tests
 
 ```bash
-python3 -m unittest discover -s .claude/tests -v
+python3 -m unittest discover -s .claude/tests -v               # Journal
+python3 -m unittest discover -s .claude/tests/day-trader       # Day-Trader-Skills, offline
 ```
+
+## Herkunft der Day-Trader-Skills
+
+`.claude/skills/trader-*` und `.claude/tests/day-trader/` sind eine unveränderte Kopie von [Jakeschincariol/day-trader-skill](https://github.com/Jakeschincariol/day-trader-skill), Stand `3d0f4ef` (Version 2.0.0), MIT-Lizenz in `.claude/skills/LICENSE-day-trader-skill`. Geändert ist nur `.claude/tests/day-trader/_load.py` (Pfade) und weggelassen `tests/test_repo.py` (prüft den Aufbau des Original-Repos). Der Code liest nur öffentliche Daten (Yahoo Finance, Nasdaq Trader, SEC EDGAR, House Clerk) und platziert selbst keine Orders.
+
+Aktualisieren nur bewusst: neue Version des Originals lesen, dann die Ordner ersetzen und beide Testläufe grün sehen.

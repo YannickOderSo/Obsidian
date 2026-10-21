@@ -13,7 +13,7 @@ Dieses Repo ist ein Obsidian-Vault und zugleich das Gedächtnis von Claude. Antw
 
 ## Trading
 
-- Die Day-Trader-Skills (`/trader-scanner` bis `/trader-pelosi`, als Plugin `/day-trader-skill:trader-…`) schreiben nach `trader/`. Befehle immer in der Wurzel dieses Repos ausführen.
+- Die Day-Trader-Skills (`/trader-scanner` bis `/trader-pelosi`, in `.claude/skills/trader-*`) schreiben nach `trader/`. Befehle immer in der Wurzel dieses Repos ausführen.
 - Nach jedem Schritt der Kette (`trader-exit`, `-timemachine`, `-budget`, `-risk`, `-broker`) den Trade mit dem Skill `trading-journal` ins Journal schreiben. Nach dem Ausstieg schließen und die Reflexion mit dem Nutzer festhalten.
 - Paper Trading ist Standard (`"paper": true` in `trader/config.json`). Niemals eine Order ohne ein ausdrückliches Ja des Nutzers für genau diese Order, und nie `paper` oder Limits in `trader/config.json` ändern, ohne dass der Nutzer es verlangt.
 - Keine Anlageberatung geben. Quoten der Time Machine sind eine Simulation, keine Vorhersage.
@@ -24,4 +24,5 @@ Dieses Repo ist ein Obsidian-Vault und zugleich das Gedächtnis von Claude. Antw
 - `Tagesnotizen/`, `00 Eingang/`, `Vorlagen/`
 - `Trading/`: Regeln, Übersicht mit `Trades.base`, `Trades/` (eine Notiz je Trade), `Statistik.md` (erzeugt)
 - `trader/`: Daten der Skills, in Obsidian ausgeblendet; nur Einstellungen, Konto und Protokoll sind in Git
-- `.claude/skills/`: `gedaechtnis`, `trading-journal`; Tests in `.claude/tests/` (`python3 -m unittest discover -s .claude/tests`)
+- `.claude/skills/`: `gedaechtnis`, `trading-journal` und die Day-Trader-Skills `trader-*` (Kopie von Jakeschincariol/day-trader-skill, Stand `3d0f4ef`; nicht ohne Nachfrage ändern oder aktualisieren)
+- Tests: `python3 -m unittest discover -s .claude/tests` (Journal) und `-s .claude/tests/day-trader` (Skills)
