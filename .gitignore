@@ -1,0 +1,22 @@
+# Obsidian: Fensterlayout und Caches gehören zum Gerät, nicht ins Gedächtnis
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.trash/
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+
+# trader/: Laufzeitdaten der Day-Trader-Skills. Was zählt, steht im Journal.
+# Behalten werden Einstellungen, Konto und das Protokoll, damit die Tageslimits
+# (Verlust, Anzahl Trades) auch über Sitzungen hinweg gelten.
+trader/*
+!trader/config.json
+!trader/portfolio.json
+!trader/alerts.json
+!trader/state/
+trader/state/*
+!trader/state/broker.json
+!trader/state/risk.json

@@ -1,0 +1,46 @@
+filters:
+  and:
+    - file.inFolder("Trading/Trades")
+properties:
+  note.symbol:
+    displayName: Symbol
+  note.setup:
+    displayName: Setup
+  note.status:
+    displayName: Status
+  note.tm_ziel:
+    displayName: TM Ziel %
+  note.risiko_check:
+    displayName: Risiko
+  note.ergebnis_r:
+    displayName: R
+  note.gewinn_usd:
+    displayName: Gewinn $
+views:
+  - type: table
+    name: Alle Trades
+    order:
+      - datum
+      - symbol
+      - setup
+      - status
+      - einstieg
+      - stop
+      - ziel
+      - tm_ziel
+      - risiko_check
+      - ergebnis_r
+      - gewinn_usd
+  - type: table
+    name: Offen
+    filters:
+      and:
+        - status != "geschlossen"
+    order:
+      - datum
+      - symbol
+      - setup
+      - status
+      - einstieg
+      - stop
+      - ziel

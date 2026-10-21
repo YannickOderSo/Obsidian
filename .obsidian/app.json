@@ -1,0 +1,11 @@
+{
+  "newFileLocation": "folder",
+  "newFileFolderPath": "00 Eingang",
+  "attachmentFolderPath": "Anhänge",
+  "alwaysUpdateLinks": true,
+  "newLinkFormat": "shortest",
+  "showUnsupportedFiles": false,
+  "userIgnoreFilters": [
+    "trader/"
+  ]
+}
