@@ -15,6 +15,7 @@ Wird in jeder Sitzung geladen. Höchstens 40 Zeilen, Details in den verlinkten N
 ## Wie arbeiten
 
 - Nichts erfinden: was es noch nicht gibt (Kunden, Zahlen, Kontaktdaten), bleibt weg oder wird klar als Platzhalter markiert.
+- Pull Requests von Claude darf Claude selbst mergen, sobald Tests grün sind (erlaubt am 2026-10-21).
 
 ## Laufend
 
