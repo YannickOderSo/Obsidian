@@ -15,6 +15,19 @@ Claude liest zu Beginn jeder Sitzung `Gedächtnis/Kern.md` (über `CLAUDE.md`), 
 5. **SEC-Kennung:** In `trader/config.json` `sec_user_agent` auf Name und E-Mail setzen (verlangt die SEC für News und Earnings), oder die Umgebungsvariable `SEC_USER_AGENT`.
 6. **Broker, erst wenn gewünscht:** Alpaca-Paper-Konto anlegen und den Alpaca-MCP-Server in Claude verbinden. Schlüssel nur in Umgebungsvariablen, nie im Chat oder im Vault. In Claude für das Order-Werkzeug „Needs approval“ einstellen, nie „Always allow“.
 
+### In einer Cloud-Sitzung
+
+Die Skills holen ihre Daten aus dem Netz. In der Cloud-Umgebung von Claude Code müssen diese Adressen freigegeben sein (Menü der Umgebung in der Titelleiste, **Edit**, **Network access**, **Allowed domains**, „Allow package managers“ angehakt lassen; Anleitung: https://code.claude.com/docs/en/cloud-environments#network-access). Die Freigabe gilt ab einer neuen Sitzung.
+
+| Adresse | gebraucht von |
+| --- | --- |
+| `www.nasdaqtrader.com` | Scanner (Liste der US-Aktien) |
+| `query1.finance.yahoo.com`, `query2.finance.yahoo.com` | Scanner, Entry, Time Machine, Alerts (Kurse) |
+| `feeds.finance.yahoo.com` | News (Schlagzeilen) |
+| `stooq.com` | Alerts (Ersatzquelle für Kurse) |
+| `www.sec.gov`, `data.sec.gov` | News (8-Ks), Analyst (Quartalszahlen) |
+| `disclosures-clerk.house.gov` | Pelosi-Tracker |
+
 ## Benutzen
 
 | Sag zu Claude | passiert |
