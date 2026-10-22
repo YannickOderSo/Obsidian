@@ -45,3 +45,7 @@ Nur wenn heute weniger als 3 Trades und das Tagesverlustlimit nicht erreicht.
 3. Reflexion je Trade: Was war der Plan, was ist passiert, stimmte die Abwägung? `journal.py stats --write`.
 4. Erst ein **Muster** über mehrere Trades kommt nach [[Gedächtnis/Erkenntnisse/Trading]]; daraus abgeleitete Regeln nach [[Trading/Regeln]] (Limits in der Config nur mit dem Nutzer).
 5. Committen und pushen.
+
+## Discord
+
+Orders, Fills und Glattstellungen meldet `paper_auto.py` selbst, wenn `DISCORD_WEBHOOK_URL` in der Umgebung steht (nie in den Vault). Zusätzlich mit `python3 $A say "…"`: nach 9:22 die Kandidaten, nach jedem Einstiegslauf die Entscheidung mit Grund (auch „kein Trade, weil …“), nach 15:47 die Tageszusammenfassung (Trades, R, Tages-P&L, Kontostand).

@@ -10,8 +10,10 @@ Gedächtnis/Entscheidungen/2026-10-22 Autonomes Paper Trading.md.
     python3 .claude/scripts/paper_auto.py place --index 1
     python3 .claude/scripts/paper_auto.py sync
     python3 .claude/scripts/paper_auto.py flatten [--symbol TSLA]
+    python3 .claude/scripts/paper_auto.py say "Text"
 
 Schlüssel kommen aus APCA_API_KEY_ID und APCA_API_SECRET_KEY und werden nie ausgegeben.
+Ist DISCORD_WEBHOOK_URL gesetzt, gehen Orders, Fills, Glattstellungen und `say` an Discord.
 """
 
 import argparse
@@ -68,6 +70,23 @@ def api(base, method, path, body=None):
     except urllib.error.HTTPError as e:
         raise AutoError("Alpaca %s %s: HTTP %s %s" % (method, path, e.code, e.read().decode()[:300]))
     return json.loads(raw) if raw else None
+
+
+def notify(text):
+    """Nachricht an den Discord-Webhook in DISCORD_WEBHOOK_URL; ohne Variable still nichts."""
+    url = os.environ.get("DISCORD_WEBHOOK_URL")
+    if not url:
+        return False
+    req = urllib.request.Request(url, method="POST",
+                                 data=json.dumps({"content": text[:1990], "username": "Paper-Autopilot"}).encode())
+    req.add_header("Content-Type", "application/json")
+    req.add_header("User-Agent", "paper-autopilot")
+    try:
+        urllib.request.urlopen(req, timeout=10).read()
+        return True
+    except (urllib.error.URLError, OSError) as e:
+        print("Discord nicht erreicht: %s" % getattr(e, "code", e))
+        return False
 
 
 def paths():
@@ -131,6 +150,9 @@ def cmd_place(a):
                                 broker_order_id=res["id"]))
     T.write_json(p["state"], state)
     print("Platziert (Paper): %s, Alpaca-ID %s, Status %s" % (T.plain(order), res["id"], res["status"]))
+    why = order.get("why") or ""
+    notify("🟢 **Order platziert (Paper)**\n%s\nmax. Verlust am Stop: %s $%s" % (
+        T.plain(order), loss if loss is not None else "?", ("\nWarum: " + why) if why else ""))
     print("Danach: paper_auto.py sync, sobald gefüllt; dann journal.py write")
     return 0
 
@@ -162,6 +184,8 @@ def cmd_sync(a):
         T.write_json(p["state"], state)
         print("Fill erfasst: %s %s %s zu %s (%s)" % (o["side"], o["filled_qty"], o["symbol"],
                                                     o["filled_avg_price"], o.get("filled_at")))
+        notify("%s **Ausgeführt:** %s %s %s zu %s $" % ("📥" if o["side"] == "buy" else "📤",
+               "Kauf" if o["side"] == "buy" else "Verkauf", o["filled_qty"], o["symbol"], o["filled_avg_price"]))
         new += 1
     if not new:
         print("Keine neuen Fills.")
@@ -185,13 +209,22 @@ def cmd_flatten(a):
             print("Gestrichen: %s %s %s (%s)" % (o["side"], o["qty"], sym, o["id"]))
         res = api(base, "DELETE", "positions/" + sym)
         print("Glattstellung %s: %s Stück, Order %s" % (sym, pos["qty"], (res or {}).get("id")))
+        notify("🔴 **Glattstellung** %s: %s Stück, offen %s $" % (sym, pos["qty"], pos["unrealized_pl"]))
     print("Danach: paper_auto.py sync, dann journal.py write oder close")
+    return 0
+
+
+def cmd_say(a):
+    """Freie Nachricht an Discord, z. B. Tageszusammenfassung oder Grund für keinen Trade."""
+    print("An Discord geschickt." if notify(a.text) else "Nicht geschickt (kein DISCORD_WEBHOOK_URL oder Fehler).")
     return 0
 
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description="Autonomer Paper-Ausführer (nur Alpaca Paper).")
     sub = ap.add_subparsers(dest="cmd", required=True)
+    say = sub.add_parser("say")
+    say.add_argument("text")
     for name in ("status", "place", "sync", "flatten"):
         s = sub.add_parser(name)
         s.add_argument("--now", help='New Yorker Zeit, z. B. "2026-10-22 10:15"')
@@ -202,7 +235,8 @@ def main(argv=None):
             s.add_argument("--symbol")
     a = ap.parse_args(argv)
     try:
-        return {"status": cmd_status, "place": cmd_place, "sync": cmd_sync, "flatten": cmd_flatten}[a.cmd](a)
+        return {"status": cmd_status, "place": cmd_place, "sync": cmd_sync, "flatten": cmd_flatten,
+                "say": cmd_say}[a.cmd](a)
     except (AutoError, T.TicketError) as e:
         print("Abgebrochen: %s" % e)
         return 2
