@@ -15,7 +15,8 @@ Dieses Repo ist ein Obsidian-Vault und zugleich das Gedächtnis von Claude. Antw
 
 - Die Day-Trader-Skills (`/trader-scanner` bis `/trader-pelosi`, in `.claude/skills/trader-*`) schreiben nach `trader/`. Befehle immer in der Wurzel dieses Repos ausführen.
 - Nach jedem Schritt der Kette (`trader-exit`, `-timemachine`, `-budget`, `-risk`, `-broker`) den Trade mit dem Skill `trading-journal` ins Journal schreiben. Nach dem Ausstieg schließen und die Reflexion mit dem Nutzer festhalten.
-- Paper Trading ist Standard (`"paper": true` in `trader/config.json`). Niemals eine Order ohne ein ausdrückliches Ja des Nutzers für genau diese Order, und nie `paper` oder Limits in `trader/config.json` ändern, ohne dass der Nutzer es verlangt.
+- Paper Trading ist Standard (`"paper": true` in `trader/config.json`). Nie `paper` oder Limits in `trader/config.json` ändern, ohne dass der Nutzer es verlangt.
+- Autonomes Paper-Experiment (Freigabe 2026-10-22): Solange `"paper": true` gilt und der Endpunkt `paper-api.alpaca.markets` ist, darf Claude Orders selbst schicken, auch aus geplanten Läufen, aber nur über `.claude/scripts/paper_auto.py` und nur nach einem PASS von `trader-risk`. Mit echtem Geld nie eine Order ohne ein ausdrückliches Ja des Nutzers für genau diese Order.
 - Blockiert die Cloud-Umgebung eine Datenquelle, auf die Liste der Adressen im README (Abschnitt „In einer Cloud-Sitzung“) verweisen und keine Ergebnisse nachbauen.
 - Keine Anlageberatung geben. Quoten der Time Machine sind eine Simulation, keine Vorhersage.
 

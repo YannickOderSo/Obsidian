@@ -1,6 +1,6 @@
 ---
 typ: index
-aktualisiert: 2026-10-21
+aktualisiert: 2026-10-22
 ---
 
 # Index
@@ -19,6 +19,7 @@ Eine Zeile je Notiz. Neue Notizen hier eintragen (Skill `gedaechtnis`).
 ## Entscheidungen
 
 - [[2026-10-21 Obsidian als Gedächtnis]]: Vault als Langzeitgedächtnis für Claude, Day Trading nur mit Paper Trading
+- [[2026-10-22 Autonomes Paper Trading]]: Claude handelt das Paper-Konto selbst, lernt aus dem Journal
 
 ## Erkenntnisse
 
@@ -27,4 +28,5 @@ Eine Zeile je Notiz. Neue Notizen hier eintragen (Skill `gedaechtnis`).
 ## Trading
 
 - [[Trading/Regeln]]: Limits und Ablauf
+- [[Trading/Autopilot]]: Ablauf der geplanten Läufe im Paper-Experiment
 - [[Trading/Übersicht]]: alle Trades und Statistik

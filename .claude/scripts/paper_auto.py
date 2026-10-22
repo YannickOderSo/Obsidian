@@ -1,0 +1,212 @@
+#!/usr/bin/env python3
+"""Autonomer Ausführer für das Paper-Experiment.
+
+Ersetzt im Paper-Betrieb das Ja je Order (trader-broker), sonst nichts:
+trader-risk muss die Order heute mit PASS geprüft haben, und alles läuft nur
+gegen das Paper-Konto von Alpaca. Freigabe des Nutzers am 2026-10-22, siehe
+Gedächtnis/Entscheidungen/2026-10-22 Autonomes Paper Trading.md.
+
+    python3 .claude/scripts/paper_auto.py status
+    python3 .claude/scripts/paper_auto.py place --index 1
+    python3 .claude/scripts/paper_auto.py sync
+    python3 .claude/scripts/paper_auto.py flatten [--symbol TSLA]
+
+Schlüssel kommen aus APCA_API_KEY_ID und APCA_API_SECRET_KEY und werden nie ausgegeben.
+"""
+
+import argparse
+import importlib.util
+import json
+import os
+import sys
+import urllib.error
+import urllib.request
+
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+PAPER_URL = "https://paper-api.alpaca.markets"
+REPLY = "autonom: Paper-Experiment, Freigabe des Nutzers vom 2026-10-22"
+
+
+class AutoError(Exception):
+    pass
+
+
+def _ticket():
+    path = os.path.join(ROOT, ".claude", "skills", "trader-broker", "ticket.py")
+    spec = importlib.util.spec_from_file_location("ticket", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+T = _ticket()
+
+
+def guard(cfg):
+    """Nur Paper: Config und Endpunkt müssen beide Paper sein."""
+    if cfg.get("paper") is not True:
+        raise AutoError('"paper" ist nicht true in trader/config.json; autonom wird nur Paper gehandelt')
+    base = os.environ.get("APCA_API_BASE_URL", PAPER_URL).rstrip("/")
+    if base.endswith("/v2"):
+        base = base[:-3]
+    if base != PAPER_URL:
+        raise AutoError("APCA_API_BASE_URL zeigt nicht auf das Paper-Konto; abgebrochen")
+    if not os.environ.get("APCA_API_KEY_ID") or not os.environ.get("APCA_API_SECRET_KEY"):
+        raise AutoError("APCA_API_KEY_ID oder APCA_API_SECRET_KEY fehlt in der Umgebung")
+    return base
+
+
+def api(base, method, path, body=None):
+    req = urllib.request.Request(base + "/v2/" + path, method=method,
+                                 data=json.dumps(body).encode() if body is not None else None)
+    req.add_header("APCA-API-KEY-ID", os.environ["APCA_API_KEY_ID"])
+    req.add_header("APCA-API-SECRET-KEY", os.environ["APCA_API_SECRET_KEY"])
+    req.add_header("Content-Type", "application/json")
+    try:
+        with urllib.request.urlopen(req, timeout=20) as r:
+            raw = r.read()
+    except urllib.error.HTTPError as e:
+        raise AutoError("Alpaca %s %s: HTTP %s %s" % (method, path, e.code, e.read().decode()[:300]))
+    return json.loads(raw) if raw else None
+
+
+def paths():
+    return {k: os.path.join(ROOT, v) for k, v in (
+        ("orders", "trader/orders.json"), ("config", "trader/config.json"),
+        ("risk", "trader/state/risk.json"), ("state", "trader/state/broker.json"),
+        ("portfolio", "trader/portfolio.json"))}
+
+
+def load_cfg(p):
+    return T.read_json(p["config"], "config", required=False) or {}
+
+
+def cmd_status(a):
+    p = paths()
+    base = guard(load_cfg(p))
+    acc = api(base, "GET", "account")
+    print("Konto %s: Eigenkapital %s, Bargeld %s, gestern %s" % (
+        acc["status"], acc["equity"], acc["cash"], acc["last_equity"]))
+    for pos in api(base, "GET", "positions"):
+        print("Position %s: %s Stück zu %s, jetzt %s, offen %s" % (
+            pos["symbol"], pos["qty"], pos["avg_entry_price"], pos["current_price"], pos["unrealized_pl"]))
+    for o in api(base, "GET", "orders?status=open&nested=true"):
+        print("Offen: %s %s %s %s (%s)" % (o["side"], o["qty"], o["symbol"], o["type"], o["id"]))
+    clock = api(base, "GET", "clock")
+    print("Markt %s, nächste Öffnung %s, nächster Schluss %s" % (
+        "offen" if clock["is_open"] else "zu", clock["next_open"], clock["next_close"]))
+    return 0
+
+
+def cmd_place(a):
+    p = paths()
+    cfg = load_cfg(p)
+    base = guard(cfg)
+    now, today = T._clock(a)
+    orders = T.read_json(p["orders"], "orders")
+    orders = orders.get("orders", orders) if isinstance(orders, dict) else orders
+    risk = T.read_json(p["risk"], "risk check", required=False)
+    state = T.load_state(p["state"])
+    order = T._pick(orders, a.index)
+    ready, label, rv = T.status_of(order, risk, state, today)
+    if not ready:
+        raise AutoError("Order %d nicht bereit: %s" % (a.index, label))
+    loss, stop = T.max_loss(order)
+    rec = {"at": T.ny_iso(now), "date": today, "index": a.index, "fingerprint": T.fingerprint(order),
+           "symbol": str(order.get("symbol", "")).upper(), "side": order.get("side"),
+           "qty": order.get("qty"), "kind": T.kind_of(order, rv), "max_loss": loss, "stop": stop,
+           "plain": T.plain(order), "status": "approved", "reply": REPLY,
+           "paper": True, "broker": "alpaca"}
+    state.setdefault("orders", []).append(rec)
+    T.write_json(p["state"], state)
+    done = {k: rec[k] for k in ("date", "index", "fingerprint", "symbol", "side", "plain",
+                                "qty", "kind", "max_loss", "stop") if rec.get(k) is not None}
+    try:
+        res = api(base, "POST", "orders", T.tool_input(order))
+    except AutoError as e:
+        state["orders"].append(dict(done, at=T.ny_iso(T.parse_now(None)), status="failed", note=str(e)[:300]))
+        T.write_json(p["state"], state)
+        raise
+    state["orders"].append(dict(done, at=T.ny_iso(T.parse_now(None)), status="placed",
+                                broker_order_id=res["id"]))
+    T.write_json(p["state"], state)
+    print("Platziert (Paper): %s, Alpaca-ID %s, Status %s" % (T.plain(order), res["id"], res["status"]))
+    print("Danach: paper_auto.py sync, sobald gefüllt; dann journal.py write")
+    return 0
+
+
+def cmd_sync(a):
+    """Gefüllte Orders von heute (Einstieg und Bracket-Beine) ins Protokoll und Portfolio übernehmen."""
+    p = paths()
+    cfg = load_cfg(p)
+    base = guard(cfg)
+    now, today = T._clock(a)
+    seen = {r.get("alpaca_fill_id") for r in T.load_state(p["state"]).get("orders", [])}
+    flat = []
+    for o in api(base, "GET", "orders?status=closed&nested=true&limit=200&after=%sT04:00:00Z" % today):
+        flat.append(o)
+        flat.extend(o.get("legs") or [])
+    new = 0
+    for o in sorted(flat, key=lambda o: o.get("filled_at") or ""):
+        if o.get("status") != "filled" or o["id"] in seen:
+            continue
+        T.apply_fill(p["portfolio"], cfg, o["symbol"], o["side"], o["filled_qty"],
+                     o["filled_avg_price"], today)
+        state = T.load_state(p["state"])
+        state.setdefault("orders", []).append({
+            "at": T.ny_iso(now), "date": today, "status": "filled", "symbol": o["symbol"],
+            "side": o["side"], "qty": o["filled_qty"], "price": float(o["filled_avg_price"]),
+            "alpaca_fill_id": o["id"], "filled_at": o.get("filled_at"),
+            "plain": "%s %s %s at %s" % (o["side"].upper(), o["filled_qty"], o["symbol"],
+                                         T._p(o["filled_avg_price"]))})
+        T.write_json(p["state"], state)
+        print("Fill erfasst: %s %s %s zu %s (%s)" % (o["side"], o["filled_qty"], o["symbol"],
+                                                    o["filled_avg_price"], o.get("filled_at")))
+        new += 1
+    if not new:
+        print("Keine neuen Fills.")
+    return 0
+
+
+def cmd_flatten(a):
+    """Offene Orders des Symbols streichen und die Position glattstellen (nur Paper)."""
+    p = paths()
+    base = guard(load_cfg(p))
+    positions = api(base, "GET", "positions")
+    if a.symbol:
+        positions = [x for x in positions if x["symbol"] == a.symbol.upper()]
+    if not positions:
+        print("Nichts offen.")
+        return 0
+    for pos in positions:
+        sym = pos["symbol"]
+        for o in api(base, "GET", "orders?status=open&nested=true&symbols=" + sym):
+            api(base, "DELETE", "orders/" + o["id"])
+            print("Gestrichen: %s %s %s (%s)" % (o["side"], o["qty"], sym, o["id"]))
+        res = api(base, "DELETE", "positions/" + sym)
+        print("Glattstellung %s: %s Stück, Order %s" % (sym, pos["qty"], (res or {}).get("id")))
+    print("Danach: paper_auto.py sync, dann journal.py write oder close")
+    return 0
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser(description="Autonomer Paper-Ausführer (nur Alpaca Paper).")
+    sub = ap.add_subparsers(dest="cmd", required=True)
+    for name in ("status", "place", "sync", "flatten"):
+        s = sub.add_parser(name)
+        s.add_argument("--now", help='New Yorker Zeit, z. B. "2026-10-22 10:15"')
+        s.add_argument("--today")
+        if name == "place":
+            s.add_argument("--index", type=int, required=True)
+        if name == "flatten":
+            s.add_argument("--symbol")
+    a = ap.parse_args(argv)
+    try:
+        return {"status": cmd_status, "place": cmd_place, "sync": cmd_sync, "flatten": cmd_flatten}[a.cmd](a)
+    except (AutoError, T.TicketError) as e:
+        print("Abgebrochen: %s" % e)
+        return 2
+
+
+if __name__ == "__main__":
+    sys.exit(main())
