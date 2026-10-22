@@ -21,6 +21,19 @@ Ablauf der geplanten Läufe im autonomen Paper-Experiment ([[2026-10-22 Autonome
 1. `python3 $S/trader-scanner/scan.py daily` (bei Zeitnot `--limit 300`), dann `python3 $S/trader-news/news.py`.
 2. Watchlist auf höchstens 5 Kandidaten eingrenzen: klares Setup, genug Volumen, keine Ergebnisse heute, keine schlechten News. Gründe kurz in die Tagesnotiz.
 
+## Setups (fest, seit 2026-10-22)
+
+Varianten vorher festgelegt und im Journal getrennt gezählt, damit die Statistik zeigt, was trägt. Nicht bei einem Signal so lange Parameter probieren, bis die Time Machine passt.
+
+| Setup | Einstieg | Stop-Varianten (beide in der Time Machine) | Ziel |
+| --- | --- | --- | --- |
+| `orb` | erste 5-Min-Kerze, die über dem Hoch der ersten 15 Minuten schließt | Mitte (`or-mid`) und Tief (`or-low`) des Eröffnungsbereichs | 2R |
+| `vortageshoch` | erste 5-Min-Kerze, die über dem Hoch des Vortags schließt (`entry.py --setup level --level H`) | dieselben zwei | 2R |
+
+- Gekauft wird höchstens eine Variante je Signal, die mit dem höheren positiven Ø R. Welche, steht im Journal (Setup und Stop-Regel).
+- Hat ein Wert die Marke heute schon genommen und wieder verloren, ist das kein Signal mehr (gescheiterter Ausbruch).
+- Nach dem 9:52-Lauf beobachten Hintergrundprozesse (`entry.py watch … --until 11:30 --out trader/entry.SYM.json`) die Watchlist; ein Ausbruch weckt den Lauf.
+
 ## 9:52 und 10:47 Einstieg
 
 Nur wenn heute weniger als 3 Trades und das Tagesverlustlimit nicht erreicht.
