@@ -22,7 +22,7 @@ Startwerte aus `trader/config.json`. Ändern nur dort, dann diese Tabelle nachzi
 | Max. Verlust je Tag | $2,500 |
 | Max. Trades je Tag | 3 |
 | Mindest-CRV | 1,5 |
-| Max. Position | 25 % des Budgets, höchstens $25,000 je Order |
+| Max. Position | 50 % des Budgets, höchstens $50,000 je Order (seit 2026-10-22, ohne Margin) |
 | Stop Pflicht | ja |
 | Einstiege | 9:45 bis 15:30 New York |
 | Flat bis | 15:55 New York |
