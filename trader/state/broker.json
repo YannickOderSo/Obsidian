@@ -75,6 +75,50 @@
       "alpaca_fill_id": "a812ed72-a51b-45eb-a150-28eb16028679",
       "filled_at": "2026-10-22T14:57:08.085985126Z",
       "plain": "BUY 418 WMT at 119.63"
+    },
+    {
+      "at": "2026-10-22T12:31:23-04:00",
+      "date": "2026-10-22",
+      "index": 1,
+      "fingerprint": "ad6ec5738885ee87",
+      "symbol": "NOW",
+      "side": "buy",
+      "qty": "254",
+      "kind": "entry",
+      "max_loss": 490.22,
+      "stop": 155.48,
+      "plain": "BUY 254 NOW, market, good for today / stop-loss 155.48 / take-profit 161.27 / max loss about $490.22 if the stop fills at 155.48 (it can fill worse in a fast market)",
+      "status": "approved",
+      "reply": "autonom: Paper-Experiment, Freigabe des Nutzers vom 2026-10-22",
+      "paper": true,
+      "broker": "alpaca"
+    },
+    {
+      "date": "2026-10-22",
+      "index": 1,
+      "fingerprint": "ad6ec5738885ee87",
+      "symbol": "NOW",
+      "side": "buy",
+      "plain": "BUY 254 NOW, market, good for today / stop-loss 155.48 / take-profit 161.27 / max loss about $490.22 if the stop fills at 155.48 (it can fill worse in a fast market)",
+      "qty": "254",
+      "kind": "entry",
+      "max_loss": 490.22,
+      "stop": 155.48,
+      "at": "2026-10-22T12:31:24-04:00",
+      "status": "placed",
+      "broker_order_id": "e73a8bc6-4851-4c3c-8c5b-3f152dbdafc6"
+    },
+    {
+      "at": "2026-10-22T12:31:35-04:00",
+      "date": "2026-10-22",
+      "status": "filled",
+      "symbol": "NOW",
+      "side": "buy",
+      "qty": "254",
+      "price": 157.32,
+      "alpaca_fill_id": "e73a8bc6-4851-4c3c-8c5b-3f152dbdafc6",
+      "filled_at": "2026-10-22T16:31:27.231472Z",
+      "plain": "BUY 254 NOW at 157.32"
     }
   ]
 }
