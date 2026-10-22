@@ -119,6 +119,30 @@
       "alpaca_fill_id": "e73a8bc6-4851-4c3c-8c5b-3f152dbdafc6",
       "filled_at": "2026-10-22T16:31:27.231472Z",
       "plain": "BUY 254 NOW at 157.32"
+    },
+    {
+      "at": "2026-10-22T15:48:36-04:00",
+      "date": "2026-10-22",
+      "status": "filled",
+      "symbol": "NOW",
+      "side": "sell",
+      "qty": "254",
+      "price": 155.93,
+      "alpaca_fill_id": "b685b4aa-5699-4516-98c0-8d769dc8e6fd",
+      "filled_at": "2026-10-22T19:48:32.030396Z",
+      "plain": "SELL 254 NOW at 155.93"
+    },
+    {
+      "at": "2026-10-22T15:48:36-04:00",
+      "date": "2026-10-22",
+      "status": "filled",
+      "symbol": "WMT",
+      "side": "sell",
+      "qty": "418",
+      "price": 120.98,
+      "alpaca_fill_id": "ef88e4cc-252e-401d-8136-e9dd050a49da",
+      "filled_at": "2026-10-22T19:48:33.293129Z",
+      "plain": "SELL 418 WMT at 120.98"
     }
   ]
 }

@@ -1,29 +1,4 @@
 {
-  "cash": 10035.38,
-  "positions": [
-    {
-      "ticker": "WMT",
-      "shares": 418.0,
-      "lots": [
-        {
-          "id": "WMT-1",
-          "date": "2026-10-22",
-          "shares": 418.0,
-          "cost": 50005.34
-        }
-      ]
-    },
-    {
-      "ticker": "NOW",
-      "shares": 254.0,
-      "lots": [
-        {
-          "id": "NOW-1",
-          "date": "2026-10-22",
-          "shares": 254.0,
-          "cost": 39959.28
-        }
-      ]
-    }
-  ]
+  "cash": 100211.24,
+  "positions": []
 }
