@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 .claude/scripts/paper_auto.py:*)"
+    ]
+  }
+}
