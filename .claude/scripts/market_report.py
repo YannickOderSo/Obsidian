@@ -145,7 +145,7 @@ def main(argv=None):
         nxt = (now + datetime.timedelta(minutes=a.every)).replace(second=30, microsecond=0)
         if a.every == 60:
             nxt = nxt.replace(minute=0)
-        if nxt.time() > datetime.time(hh, mm) or now.time() >= datetime.time(hh, mm):
+        if (nxt.hour, nxt.minute) > (hh, mm) or now.time() >= datetime.time(hh, mm):
             return 0
         time.sleep(max(60, (nxt - datetime.datetime.now(NY)).total_seconds()))
 
