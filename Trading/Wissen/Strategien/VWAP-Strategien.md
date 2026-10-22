@@ -17,13 +17,13 @@ Zurück zum Hub: [[Trading/Wissen/Übersicht]] · Limits: [[Trading/Regeln]]
 
 ## Definition
 
-VWAP = Summe aus (Preis × Volumen) aller Trades ÷ Summe des Volumens, gerechnet ab der Eröffnung. In der Praxis rechnet man auf Bars mit dem typischen Preis (Hoch + Tief + Schluss) / 3 × Bar-Volumen. Der VWAP beginnt jeden Tag neu. Er ist deshalb ein reines Intraday-Werkzeug und taugt wenig für dünn gehandelte Aktien.
+VWAP = Summe aus (Preis × Volumen) aller Trades ÷ Summe des Volumens, gerechnet ab der Eröffnung. Chartprogramme nähern das auf Bars an; die genaue Rechnung unterscheidet sich je Plattform. Der VWAP beginnt jeden Tag neu. Er ist deshalb ein reines Intraday-Werkzeug und taugt wenig für dünn gehandelte Aktien.
 
 | Eigenschaft | Folge |
 | --- | --- |
 | startet bei 9:30 neu | am Morgen springt er stark, nachmittags bewegt er sich kaum noch |
 | gewichtet nach Volumen | Kurse mit viel Umsatz zählen mehr |
-| Pre-Market meist nicht enthalten | Plattformen rechnen unterschiedlich. Vor dem Vergleich klären, welcher VWAP gemeint ist |
+| mit oder ohne Pre-Market | die Studie unten rechnet ohne Pre- und After-Market. Vor dem Vergleich klären, welcher VWAP gemeint ist |
 
 ## Warum Institutionen auf den VWAP schauen
 
@@ -104,8 +104,8 @@ Fiktive Aktie: VWAP $39,80, Kurs fällt bis $39,60, ein 5-Min-Bar schließt bei 
 
 - **Kein Skill rechnet den VWAP.** `/trader-scanner` und `/trader-entry` arbeiten mit Range-Hoch oder einem festen Level, nicht mit einer Linie, die sich bewegt. VWAP-Setups muss man am Chart (z. B. TradingView oder Alpaca) selbst ablesen.
 - **Halbautomatisch**: Den VWAP-Wert ablesen und mit `/trader-entry TICKER --setup level --level <VWAP>` auf einen Schlusskurs darüber warten. Weil der VWAP wandert, ist das nur eine Näherung. Kurz vor dem Signal neu ablesen.
-- **`/trader-exit`**: Bei einem Level-Setup braucht es einen eigenen Stop (`price:X` unter dem Test-Tief). Der Stop darf nicht unter 0,05 % vom Einstieg liegen, sonst lehnt der Skill ab.
-- **Filter für ORB**: Ein ORB-Signal über dem VWAP ist in der Logik von Aziz stärker als eines darunter. Bei einem Ausbruch über das Range-Hoch liegt der Kurs meist ohnehin über dem VWAP. Belegt ist der Zusatznutzen nicht.
+- **`/trader-exit`**: Bei einem Level-Setup braucht es einen eigenen Stop (`price:X` unter dem Test-Tief). Ein Risiko unter 0,05 % des Kurses lehnt der Skill als zu eng ab.
+- **Filter für ORB**: Ein ORB-Signal über dem VWAP ist in der Logik von Aziz stärker als eines darunter. Bei einem Ausbruch über das Range-Hoch liegt der Kurs fast immer schon über dem VWAP, weil der VWAP ein Durchschnitt der bisherigen Kurse ist. Als Zusatzfilter bringt er beim ORB also wenig; belegt ist ein Nutzen nicht.
 - **Zeitfenster**: Die Studie steigt um 9:31 ein. Bei uns gehen Einstiege erst ab 9:45, und um 15:55 muss alles geschlossen sein. Die großen Trendtage der Studie laufen oft bis 16:00.
 - Indikatoren allgemein: [[Indikatoren]]. Vergleich: [[Strategien im Vergleich]].
 
