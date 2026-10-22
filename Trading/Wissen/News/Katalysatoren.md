@@ -32,9 +32,9 @@ Zurück zum Hub: [[Trading/Wissen/Übersicht]] · Limits: [[Trading/Regeln]] · 
 | **Guidance** (Ausblick) | oft wichtiger als die Zahlen selbst; „Beat and lower“ fällt | gut, aber schwer sauber zu messen | Pressemitteilung und Call lesen, nicht nur die Schlagzeile |
 | **Analysten-Up-/Downgrades** | spürbarer Sprung am Tag; Downgrades wirken stärker und länger | gut (Womack 1996: Kaufempfehlungen ca. +2,4 % Drift kurz, Verkaufsempfehlungen ca. −9,1 % über rund sechs Monate) | oft vorbörslich; Wirkung bei großen Werten meist klein |
 | **M&A, Übernahme** | Zielaktie springt Richtung Angebotspreis, liegt dann knapp darunter | gut; Prämien je nach Messung und Zeitraum meist etwa 20–40 % | nach dem Sprung kaum noch Bewegung: schlechter Day-Trade-Kandidat |
-| **FDA-Entscheid** (Zulassung, PDUFA-Termin, Studiendaten) | binär: kleine Biotechs können ±50 % und mehr springen | Einzelfälle gut dokumentiert, Durchschnitt wenig aussagekräftig | Gap-Risiko riesig; kleine Biotechs passen kaum zu $50 Max-Verlust |
+| **FDA-Entscheid** (Zulassung, PDUFA-Termin, Studiendaten) | binär: kleine Biotechs können an einem Tag einen großen Teil ihres Werts gewinnen oder verlieren | Einzelfälle gut dokumentiert, Durchschnitt wenig aussagekräftig | Gap-Risiko riesig; kleine Biotechs passen kaum zu $50 Max-Verlust |
 | **Kapitalerhöhung / Verwässerung** (Offering, ATM-Programm, Wandelanleihe) | Kurs fällt meist bei Ankündigung | gut; ältere US-Studien nennen im Schnitt etwa −2 bis −3 % (Asquith & Mullins 1986 u. a.) | häufige Falle bei Small Caps nach einem Anstieg |
-| **Index-Aufnahme** (S&P 500) | früher großer Sprung, heute klein | gut: Effekt fiel von 7,4 % in den 1990ern auf unter 1 % im letzten Jahrzehnt (Greenwood & Sammon 2025) | Ankündigung meist nach Börsenschluss, Umsetzung am Stichtag zum Schlusskurs |
+| **Index-Aufnahme** (S&P 500) | früher großer Sprung, heute klein | gut: Effekt fiel von 7,4 % in den 1990ern auf unter 1 % im letzten Jahrzehnt (Greenwood & Sammon 2025) | Umsetzung meist zum Schlusskurs am Stichtag, also nach unserem Flat-Zeitpunkt |
 | **Short Squeeze** | steile Anstiege, wenn Leerverkäufer eindecken müssen | Mechanik klar, Häufigkeit überschätzt (SEC-Bericht zu GameStop 2021) | extrem volatil; nur mit sehr kleiner Position denkbar |
 | **Personal** (CEO-/CFO-Wechsel) | uneinheitlich; plötzlicher Abgang oft negativ | gemischt | 8-K Item 5.02 lesen: Grund des Wechsels? |
 | **Makro** (Fed, CPI, Arbeitsmarkt) | bewegt den ganzen Markt, nicht nur eine Aktie | sehr gut | Termine kennen; siehe [[Makro-Termine]] |
@@ -57,7 +57,7 @@ Neue Aktien verteilen den Gewinn auf mehr Stücke. Die Forschung erklärt den Ku
 
 ### Index-Aufnahme
 
-Früher stieg eine Aktie bei Aufnahme in den S&P 500 kräftig, weil Indexfonds kaufen mussten. Greenwood und Sammon zeigen, dass dieser Effekt fast verschwunden ist: Viele Aufnahmen sind heute Wechsel aus dem S&P MidCap 400, deren Indexfonds gleichzeitig verkaufen, und Aufnahmen sind besser vorhersehbar. Das Volumen am Stichtag (meist der dritte Freitag im Quartal, siehe [[Makro-Termine]]) ist trotzdem riesig, vor allem in der Schlussauktion, also nach unserem Flat-Zeitpunkt.
+Früher stieg eine Aktie bei Aufnahme in den S&P 500 kräftig, weil Indexfonds kaufen mussten. Greenwood und Sammon zeigen, dass dieser Effekt fast verschwunden ist: Viele Aufnahmen sind heute Wechsel aus dem S&P MidCap 400, deren Indexfonds gleichzeitig verkaufen, und Aufnahmen sind besser vorhersehbar. Das Volumen am Stichtag (bei den Quartalsanpassungen der dritte Freitag im März, Juni, September und Dezember, siehe [[Makro-Termine]]; einzelne Aufnahmen gibt es auch dazwischen) ist trotzdem riesig, vor allem in der Schlussauktion, also nach unserem Flat-Zeitpunkt.
 
 ### Short Squeeze
 
