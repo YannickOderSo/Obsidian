@@ -252,18 +252,36 @@ def report_text(base):
     positions = api(base, "GET", "positions")
     if not positions:
         return None
-    legs = {}
+    legs, opened, entries, realized = {}, {}, 0, 0.0
     for o in api(base, "GET", "orders?status=all&nested=true&limit=100&after=%s" %
                  datetime.date.today().isoformat()):
         if o.get("order_class") != "bracket" or o.get("status") != "filled":
             continue
+        entries += 1
+        if o.get("filled_at"):
+            t = datetime.datetime.fromisoformat(o["filled_at"][:19] + "+00:00")
+            opened[o["symbol"]] = max(opened.get(o["symbol"], t), t)
         for l in o.get("legs") or []:
+            if l.get("status") == "filled":
+                realized += (float(l["filled_avg_price"]) - float(o["filled_avg_price"])) * float(l["filled_qty"])
             if l.get("status") in ("new", "held", "accepted", "partially_filled"):
                 key = "stop" if l["type"] in ("stop", "stop_limit") else "target"
                 legs.setdefault(o["symbol"], {})[key] = float(l.get("stop_price") or l.get("limit_price"))
     acc = api(base, "GET", "account")
     now = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=-4)))
     lines = ["📊 **Stand %s NY**" % now.strftime("%H:%M")]
+    unreal = sum(float(p["unrealized_pl"]) for p in positions)
+    day = float(acc["equity"]) - float(acc["last_equity"])
+    at_risk = sum(max(0.0, (float(p["avg_entry_price"]) - legs.get(p["symbol"], {}).get("stop", float(p["avg_entry_price"])))
+                      * float(p["qty"])) for p in positions)
+    lines.append("📋 **Übersicht:** %d offen · Trades heute %d · Risiko am Stop gesamt %.0f $ · offen %+.2f $ · "
+                 "realisiert %+.2f $" % (len(positions), entries, at_risk, unreal, realized))
+    for p in positions:
+        t = opened.get(p["symbol"])
+        if t:
+            mins = int((now - t).total_seconds() // 60)
+            lines.append("• %s seit %s NY (%d h %02d min)" % (p["symbol"], t.astimezone(now.tzinfo).strftime("%H:%M"),
+                                                           mins // 60, mins % 60))
     for p in positions:
         sym, qty = p["symbol"], float(p["qty"])
         entry, cur = float(p["avg_entry_price"]), float(p["current_price"])

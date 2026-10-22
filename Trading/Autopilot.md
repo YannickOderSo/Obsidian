@@ -52,7 +52,7 @@ Nur wenn heute weniger als 8 Trades und das Tagesverlustlimit nicht erreicht.
 
 ## Zwischendurch
 
-- **Updates alle 15 Minuten** (Wunsch des Nutzers 2026-10-22): Nach dem ersten Kauf des Tages `python3 $A report --every 15 --until 15:55` im Hintergrund starten. Meldet je offene Position Kurs, Stop, Ziel, Abstände, P&L und R an Discord und holt dabei neue Fills. Ohne offene Position schweigt er. Endet er vor 15:55 (2-Stunden-Grenze), neu starten.
+- **Updates alle 15 Minuten** (Wunsch des Nutzers 2026-10-22): Nach dem ersten Kauf des Tages `python3 $A report --every 15 --until 15:55` im Hintergrund starten. Meldet eine Übersicht (offene Trades, Laufzeit, Gesamtrisiko, offenes und realisiertes Ergebnis) und je offene Position Kurs, Stop, Ziel, Abstände, P&L und R an Discord und holt dabei neue Fills. Ohne offene Position schweigt er. Endet er vor 15:55 (2-Stunden-Grenze), neu starten.
 
 `python3 $A sync` holt Fills (Einstieg, Stop, Ziel) ins Protokoll; danach `journal.py write`, bei Stop oder Ziel `journal.py close --exit PREIS`.
 
