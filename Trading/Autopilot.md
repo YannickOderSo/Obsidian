@@ -38,7 +38,7 @@ Varianten vorher festgelegt und im Journal getrennt gezählt, damit die Statisti
 
 ## 9:52 und 10:47 Einstieg
 
-Nur wenn heute weniger als 3 Trades und das Tagesverlustlimit nicht erreicht.
+Nur wenn heute weniger als 8 Trades und das Tagesverlustlimit nicht erreicht.
 
 1. `python3 $S/trader-scanner/scan.py orb --watchlist trader/watchlist.json`, dann `python3 $S/trader-entry/entry.py watchlist`.
 2. Je ausgelöstem Kandidat (bester zuerst): `entry.py check SYM --write`, `exit.py plan --write`, `timemachine.py run --until 15:55 --write`.

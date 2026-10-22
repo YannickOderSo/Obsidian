@@ -20,7 +20,7 @@ Startwerte aus `trader/config.json`. Ändern nur dort, dann diese Tabelle nachzi
 | Budget | $100,000 (Paper-Konto) |
 | Max. Verlust je Trade | $1,000 (1 %) |
 | Max. Verlust je Tag | $2,500 |
-| Max. Trades je Tag | 3 |
+| Max. Trades je Tag | 8 (seit 2026-10-22; Orders je Tag 20) |
 | Mindest-CRV | 1,5 |
 | Max. Position | 50 % des Budgets, höchstens $50,000 je Order (seit 2026-10-22, ohne Margin) |
 | Stop Pflicht | ja |
