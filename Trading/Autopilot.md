@@ -20,6 +20,7 @@ Ablauf der geplanten Läufe im autonomen Paper-Experiment ([[2026-10-22 Autonome
 
 1. `python3 $S/trader-scanner/scan.py daily` (bei Zeitnot `--limit 300`), dann `python3 $S/trader-news/news.py`.
 2. Watchlist auf höchstens 5 Kandidaten eingrenzen: klares Setup, genug Volumen, keine Ergebnisse heute, keine schlechten News. Gründe kurz in die Tagesnotiz.
+3. Noch in diesem Lauf `watch_wide.py` (siehe Setups) im Hintergrund starten, `--skip` mit den Werten, die heute Zahlen melden oder vorbörslich stark fallen. Er wartet bis zur ersten Kerze nach 9:45 und meldet jedes frische Signal. Grund: Am 2026-10-22 fielen alle 40 Signale der 60 Charts zwischen 9:30 und 10:10; ein Start erst um 10:25 verpasst sie.
 
 ## Setups (fest, seit 2026-10-22)
 
