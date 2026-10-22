@@ -33,7 +33,7 @@ Varianten vorher festgelegt und im Journal getrennt gezählt, damit die Statisti
 
 - Gekauft wird höchstens eine Variante je Signal, die mit dem höheren positiven Ø R. Welche, steht im Journal (Setup und Stop-Regel).
 - Hat ein Wert die Marke heute schon genommen und wieder verloren, ist das kein Signal mehr (gescheiterter Ausbruch).
-- Nach dem 9:52-Lauf beobachtet `python3 .claude/scripts/watch_wide.py --from-watchlist trader/watchlist.full.json --top 60 --skip <Zahlen heute> --seen <SYM:setup schon bewertet> --until 11:30` im Hintergrund die liquidesten 60 Setups (Ausbruch, Bull Flag, über dem 20-Tage-Schnitt, RSI 45 bis 72) auf beide Setups. Ein frisches Signal beendet ihn und weckt den Lauf: News prüfen, bewerten, danach mit erweitertem `--seen` neu starten.
+- Nach dem 9:52-Lauf beobachtet `python3 .claude/scripts/watch_wide.py --from-watchlist trader/watchlist.full.json --top 60 --skip <Zahlen heute> --seen <SYM:setup schon bewertet> --until 15:00` im Hintergrund die liquidesten 60 Setups (Ausbruch, Bull Flag, über dem 20-Tage-Schnitt, RSI 45 bis 72) auf beide Setups. Ein frisches Signal beendet ihn und weckt den Lauf: News prüfen, bewerten, danach mit erweitertem `--seen` neu starten.
 
 ## 9:52 und 10:47 Einstieg
 
