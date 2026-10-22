@@ -17,6 +17,7 @@ Ist DISCORD_WEBHOOK_URL gesetzt, gehen Orders, Fills, Glattstellungen und `say` 
 """
 
 import argparse
+import datetime
 import importlib.util
 import json
 import os
@@ -117,6 +118,35 @@ def cmd_status(a):
     return 0
 
 
+def rest_body(order):
+    """place_stock_order-Felder (flach, wie der MCP-Server) in die Form der REST-API bringen:
+    Bracket-Beine verschachtelt als take_profit / stop_loss."""
+    body = T.tool_input(order)
+    tp = body.pop("take_profit_limit_price", None)
+    sl = body.pop("stop_loss_stop_price", None)
+    sll = body.pop("stop_loss_limit_price", None)
+    if tp is not None:
+        body["take_profit"] = {"limit_price": tp}
+    if sl is not None:
+        body["stop_loss"] = {"stop_price": sl}
+        if sll is not None:
+            body["stop_loss"]["limit_price"] = sll
+    return body
+
+
+def retry_ok(state, fp, today, risk):
+    """Eine gescheiterte Order darf erneut raus, wenn trader-risk sie danach noch einmal geprüft hat."""
+    rec = T.latest(state, fp, today)
+    if not rec or rec.get("status") != "failed" or not risk:
+        return False
+    try:
+        checked = datetime.datetime.fromisoformat(str(risk.get("checked_at", "")).replace("Z", "+00:00"))
+        failed = datetime.datetime.fromisoformat(str(rec.get("at", "")))
+    except ValueError:
+        return False
+    return checked > failed
+
+
 def cmd_place(a):
     p = paths()
     cfg = load_cfg(p)
@@ -128,6 +158,8 @@ def cmd_place(a):
     state = T.load_state(p["state"])
     order = T._pick(orders, a.index)
     ready, label, rv = T.status_of(order, risk, state, today)
+    if not ready and rv and rv.get("verdict") == "PASS" and retry_ok(state, T.fingerprint(order), today, risk):
+        ready = True
     if not ready:
         raise AutoError("Order %d nicht bereit: %s" % (a.index, label))
     loss, stop = T.max_loss(order)
@@ -141,7 +173,7 @@ def cmd_place(a):
     done = {k: rec[k] for k in ("date", "index", "fingerprint", "symbol", "side", "plain",
                                 "qty", "kind", "max_loss", "stop") if rec.get(k) is not None}
     try:
-        res = api(base, "POST", "orders", T.tool_input(order))
+        res = api(base, "POST", "orders", rest_body(order))
     except AutoError as e:
         state["orders"].append(dict(done, at=T.ny_iso(T.parse_now(None)), status="failed", note=str(e)[:300]))
         T.write_json(p["state"], state)

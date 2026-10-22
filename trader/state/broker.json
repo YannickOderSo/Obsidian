@@ -1,0 +1,80 @@
+{
+  "orders": [
+    {
+      "at": "2026-10-22T10:56:14-04:00",
+      "date": "2026-10-22",
+      "index": 1,
+      "fingerprint": "ac5510cbe0ff0de5",
+      "symbol": "WMT",
+      "side": "buy",
+      "qty": "418",
+      "kind": "entry",
+      "max_loss": 355.3,
+      "stop": 118.69,
+      "plain": "BUY 418 WMT, market, good for today / stop-loss 118.69 / take-profit 121.24 / max loss about $355.30 if the stop fills at 118.69 (it can fill worse in a fast market)",
+      "status": "approved",
+      "reply": "autonom: Paper-Experiment, Freigabe des Nutzers vom 2026-10-22",
+      "paper": true,
+      "broker": "alpaca"
+    },
+    {
+      "date": "2026-10-22",
+      "index": 1,
+      "fingerprint": "ac5510cbe0ff0de5",
+      "symbol": "WMT",
+      "side": "buy",
+      "plain": "BUY 418 WMT, market, good for today / stop-loss 118.69 / take-profit 121.24 / max loss about $355.30 if the stop fills at 118.69 (it can fill worse in a fast market)",
+      "qty": "418",
+      "kind": "entry",
+      "max_loss": 355.3,
+      "stop": 118.69,
+      "at": "2026-10-22T10:56:15-04:00",
+      "status": "failed",
+      "note": "Alpaca POST orders: HTTP 422 {\"code\":40010001,\"message\":\"bracket orders require take_profit.limit_price\"}"
+    },
+    {
+      "at": "2026-10-22T10:57:06-04:00",
+      "date": "2026-10-22",
+      "index": 1,
+      "fingerprint": "ac5510cbe0ff0de5",
+      "symbol": "WMT",
+      "side": "buy",
+      "qty": "418",
+      "kind": "entry",
+      "max_loss": 355.3,
+      "stop": 118.69,
+      "plain": "BUY 418 WMT, market, good for today / stop-loss 118.69 / take-profit 121.24 / max loss about $355.30 if the stop fills at 118.69 (it can fill worse in a fast market)",
+      "status": "approved",
+      "reply": "autonom: Paper-Experiment, Freigabe des Nutzers vom 2026-10-22",
+      "paper": true,
+      "broker": "alpaca"
+    },
+    {
+      "date": "2026-10-22",
+      "index": 1,
+      "fingerprint": "ac5510cbe0ff0de5",
+      "symbol": "WMT",
+      "side": "buy",
+      "plain": "BUY 418 WMT, market, good for today / stop-loss 118.69 / take-profit 121.24 / max loss about $355.30 if the stop fills at 118.69 (it can fill worse in a fast market)",
+      "qty": "418",
+      "kind": "entry",
+      "max_loss": 355.3,
+      "stop": 118.69,
+      "at": "2026-10-22T10:57:07-04:00",
+      "status": "placed",
+      "broker_order_id": "a812ed72-a51b-45eb-a150-28eb16028679"
+    },
+    {
+      "at": "2026-10-22T10:57:13-04:00",
+      "date": "2026-10-22",
+      "status": "filled",
+      "symbol": "WMT",
+      "side": "buy",
+      "qty": "418",
+      "price": 119.63,
+      "alpaca_fill_id": "a812ed72-a51b-45eb-a150-28eb16028679",
+      "filled_at": "2026-10-22T14:57:08.085985126Z",
+      "plain": "BUY 418 WMT at 119.63"
+    }
+  ]
+}
