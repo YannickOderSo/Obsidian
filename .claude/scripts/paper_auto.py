@@ -22,6 +22,7 @@ import importlib.util
 import json
 import os
 import sys
+import time
 import urllib.error
 import urllib.request
 
@@ -246,6 +247,67 @@ def cmd_flatten(a):
     return 0
 
 
+def report_text(base):
+    """Stand aller offenen Positionen: Kurs, Stop, Ziel, P&L, R. None, wenn nichts offen ist."""
+    positions = api(base, "GET", "positions")
+    if not positions:
+        return None
+    legs = {}
+    for o in api(base, "GET", "orders?status=all&nested=true&limit=100&after=%s" %
+                 datetime.date.today().isoformat()):
+        if o.get("order_class") != "bracket" or o.get("status") != "filled":
+            continue
+        for l in o.get("legs") or []:
+            if l.get("status") in ("new", "held", "accepted", "partially_filled"):
+                key = "stop" if l["type"] in ("stop", "stop_limit") else "target"
+                legs.setdefault(o["symbol"], {})[key] = float(l.get("stop_price") or l.get("limit_price"))
+    acc = api(base, "GET", "account")
+    now = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=-4)))
+    lines = ["📊 **Stand %s NY**" % now.strftime("%H:%M")]
+    for p in positions:
+        sym, qty = p["symbol"], float(p["qty"])
+        entry, cur = float(p["avg_entry_price"]), float(p["current_price"])
+        pl, plpc = float(p["unrealized_pl"]), float(p["unrealized_plpc"]) * 100
+        lg = legs.get(sym, {})
+        stop, target = lg.get("stop"), lg.get("target")
+        parts = ["**%s** %g Stück, Einstieg %.2f, jetzt %.2f" % (sym, qty, entry, cur),
+                 "P&L **%+.2f $** (%+.2f %%)" % (pl, plpc)]
+        if stop:
+            r = (cur - entry) / (entry - stop) if entry > stop else 0
+            parts.append("Stop %.2f (%.2f %% entfernt, max. Verlust %.0f $)" % (
+                stop, (cur - stop) / cur * 100, (entry - stop) * qty))
+            parts.append("aktuell %+.2f R" % r)
+        if target:
+            parts.append("Ziel %.2f (%.2f %% entfernt, Gewinn dort %.0f $)" % (
+                target, (target - cur) / cur * 100, (target - entry) * qty))
+        lines.append(" · ".join(parts))
+    lines.append("Konto %.0f $, heute %+.2f $" % (float(acc["equity"]), float(acc["equity"]) - float(acc["last_equity"])))
+    return "\n".join(lines)
+
+
+def cmd_report(a):
+    """Stand an Discord; mit --every N alle N Minuten bis --until (holt dabei neue Fills)."""
+    p = paths()
+    base = guard(load_cfg(p))
+    hh, mm = map(int, a.until.split(":"))
+    ny = datetime.timezone(datetime.timedelta(hours=-4))
+    while True:
+        cmd_sync(a)
+        text = report_text(base)
+        if text:
+            print(text)
+            notify(text)
+        else:
+            print("Keine offene Position.")
+        if not a.every:
+            return 0
+        now = datetime.datetime.now(ny)
+        if now.time() >= datetime.time(hh, mm):
+            return 0
+        nxt = now + datetime.timedelta(minutes=a.every)
+        time.sleep(max(60, (nxt - datetime.datetime.now(ny)).total_seconds()))
+
+
 def cmd_say(a):
     """Freie Nachricht an Discord, z. B. Tageszusammenfassung oder Grund für keinen Trade."""
     print("An Discord geschickt." if notify(a.text) else "Nicht geschickt (kein DISCORD_WEBHOOK_URL oder Fehler).")
@@ -257,7 +319,7 @@ def main(argv=None):
     sub = ap.add_subparsers(dest="cmd", required=True)
     say = sub.add_parser("say")
     say.add_argument("text")
-    for name in ("status", "place", "sync", "flatten"):
+    for name in ("status", "place", "sync", "flatten", "report"):
         s = sub.add_parser(name)
         s.add_argument("--now", help='New Yorker Zeit, z. B. "2026-10-22 10:15"')
         s.add_argument("--today")
@@ -265,10 +327,13 @@ def main(argv=None):
             s.add_argument("--index", type=int, required=True)
         if name == "flatten":
             s.add_argument("--symbol")
+        if name == "report":
+            s.add_argument("--every", type=float, help="Minuten zwischen Meldungen (ohne: einmal)")
+            s.add_argument("--until", default="15:55", help="New Yorker Zeit, bis wann gemeldet wird")
     a = ap.parse_args(argv)
     try:
         return {"status": cmd_status, "place": cmd_place, "sync": cmd_sync, "flatten": cmd_flatten,
-                "say": cmd_say}[a.cmd](a)
+                "say": cmd_say, "report": cmd_report}[a.cmd](a)
     except (AutoError, T.TicketError) as e:
         print("Abgebrochen: %s" % e)
         return 2
