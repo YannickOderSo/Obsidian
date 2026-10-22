@@ -56,11 +56,11 @@ Im Fall C bleibt der Verlust „gefangen“, auch wenn im selben Jahr Zinsen anf
 
 ## Ausländischer Broker: selbst erklären
 
-Ein US-Broker wie Alpaca behält **keine** deutsche Kapitalertragsteuer ein und meldet nichts an das deutsche Finanzamt (über den automatischen Informationsaustausch können Daten trotzdem ankommen). Kapitalerträge ohne Steuerabzug **müssen** in der Steuererklärung angegeben werden (§ 32d Abs. 3 EStG), mit der **Anlage KAP**.
+Ein US-Broker wie Alpaca behält **keine** deutsche Kapitalertragsteuer ein und stellt keine deutsche Steuerbescheinigung aus. Kapitalerträge ohne Steuerabzug **müssen** in der Steuererklärung angegeben werden (§ 32d Abs. 3 EStG), mit der **Anlage KAP**.
 
 - Im Formular 2025 stehen ausländische Erträge ohne Steuerabzug in Zeile 19, darin enthaltene Aktiengewinne zusätzlich in Zeile 20, Verluste in eigenen Zeilen. Die Zeilennummern ändern sich fast jedes Jahr, daher das aktuelle Formular und die Anleitung prüfen.
 - Unterlagen: vollständige Trade-Historie mit Datum, Stückzahl, Kurs in USD und Gebühren. Ausländische Jahresberichte folgen nicht der deutschen Logik (kein Aktientopf, keine Euro-Umrechnung), man muss selbst rechnen.
-- Wer bisher keine Steuererklärung abgeben musste, muss es dann tun.
+- Das kann eine Steuererklärung nötig machen, auch wenn man bisher keine abgeben musste.
 
 ## Währungsumrechnung
 
@@ -83,7 +83,7 @@ Bei Day Trades ist der Kurseffekt klein, weil Kauf und Verkauf am selben Tag lie
 
 - **Kursgewinne:** Für Personen ohne US-Steuerpflicht (Nonresident Aliens) sind Gewinne aus dem Verkauf von US-Aktien in der Regel in den USA steuerfrei, solange man sich weniger als 183 Tage im Jahr in den USA aufhält und kein US-Geschäftsbetrieb vorliegt (IRS Publication 519). Versteuert wird in Deutschland.
 - **Dividenden:** Ohne Formular **W-8BEN** behält der Broker 30 % US-Quellensteuer ein, mit W-8BEN nach dem Doppelbesteuerungsabkommen **15 %**. Diese 15 % werden auf die deutsche Abgeltungsteuer angerechnet (§ 32d Abs. 5 EStG). Wer flat bis 15:55 ist, hält über Nacht nichts und bekommt in der Regel keine Dividenden.
-- **Publicly Traded Partnerships (PTP):** Beim Verkauf von Anteilen an US-Partnerships (z. B. manche Energie-MLPs) müssen Broker seit 2023 bei Nicht-US-Personen 10 % des **Bruttoerlöses** einbehalten (Section 1446(f)), sofern die PTP keine Ausnahme meldet. Für Day Trades wäre das verheerend: solche Titel meiden.
+- **Publicly Traded Partnerships (PTP):** Beim Verkauf von Anteilen an US-Partnerships (z. B. manche Energie-MLPs) müssen Broker seit 2023 bei Nicht-US-Personen 10 % des **Bruttoerlöses** einbehalten (Section 1446(f)), sofern die PTP keine Ausnahme meldet. Bei einer Position von rund 2.900 $ wären das etwa 290 $ Einbehalt, fast das Sechsfache des geplanten Risikos von 50 $: solche Titel meiden.
 
 ## Gewerblicher Handel als Risiko
 

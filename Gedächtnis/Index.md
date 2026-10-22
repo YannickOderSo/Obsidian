@@ -1,6 +1,6 @@
 ---
 typ: index
-aktualisiert: 2026-10-21
+aktualisiert: 2026-10-22
 ---
 
 # Index
@@ -28,3 +28,4 @@ Eine Zeile je Notiz. Neue Notizen hier eintragen (Skill `gedaechtnis`).
 
 - [[Trading/Regeln]]: Limits und Ablauf
 - [[Trading/Übersicht]]: alle Trades und Statistik
+- [[Trading/Wissen/Übersicht]]: Nachschlagewerk mit Quellen (37 Notizen: Strategien, Muster, Risiko, Markt, News), recherchiert 2026-10-22

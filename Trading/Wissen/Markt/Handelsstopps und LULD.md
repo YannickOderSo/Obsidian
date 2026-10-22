@@ -48,7 +48,7 @@ Maßgeblich ist der Schlusskurs des Vortags; die Prozentzahl ändert sich im Tag
 
 ### Beispiel
 
-Aktie mit Vortagesschluss 20 $ (Tier 2), Referenzpreis um 10:30 bei 22,00 $. Band: 19,80 $ bis 24,20 $ (±10 %). Bei derselben Aktie in Tier 1 wären es 20,90 $ bis 23,10 $ (±5 %). Ein Long mit Stop bei 21,50 $ ist bei einem Absturz innerhalb weniger Sekunden nicht vor 20,90 $ (Tier 1) bzw. 19,80 $ (Tier 2) „geschützt“: Erreicht der Kurs das Band und bleibt dort, wird pausiert, und der Stop füllt erst nach der Wiedereröffnung.
+Aktie mit Vortagesschluss 20 $ (Tier 2), Referenzpreis um 10:30 bei 22,00 $. Band: 19,80 $ bis 24,20 $ (±10 %). Bei derselben Aktie in Tier 1 wären es 20,90 $ bis 23,10 $ (±5 %). LULD schützt also nicht vor Verlusten innerhalb des Bands: Fällt der Kurs schlagartig, wird bis 20,90 $ (Tier 1) bzw. 19,80 $ (Tier 2) normal gehandelt, und ein Stop bei 21,50 $ füllt irgendwo in diesem Bereich. Erreicht der Kurs das Band und wird pausiert, füllt der Stop erst nach der Wiedereröffnung, möglicherweise noch tiefer.
 
 ## Marktweite Circuit Breaker (MWCB)
 

@@ -26,3 +26,4 @@ Wird in jeder Sitzung geladen. Höchstens 40 Zeilen, Details in den verlinkten N
 
 - Überblick über alles Gemerkte: [[Gedächtnis/Index]]
 - Lehren aus dem Trading: [[Gedächtnis/Erkenntnisse/Trading]]
+- Trading-Wissen (Strategien, Risiko, Termine): [[Trading/Wissen/Übersicht]]
