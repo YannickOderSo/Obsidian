@@ -1,6 +1,6 @@
 ---
 typ: index
-aktualisiert: 2026-10-21
+aktualisiert: 2026-10-22
 ---
 
 # Index
@@ -23,6 +23,7 @@ Eine Zeile je Notiz. Neue Notizen hier eintragen (Skill `gedaechtnis`).
 ## Erkenntnisse
 
 - [[Gedächtnis/Erkenntnisse/Trading|Trading]]: Lehren aus dem Journal
+- [[Alpaca unter Windows]]: Einrichtung des Alpaca-Servers in Claude Desktop, Stolpersteine
 
 ## Trading
 
