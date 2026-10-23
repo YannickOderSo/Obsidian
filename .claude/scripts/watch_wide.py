@@ -70,6 +70,21 @@ def signals(sym, now):
     return out
 
 
+def tradable(min_free):
+    """Ist nach der Reserve aus der Config noch genug Bargeld für einen Kauf frei? Im Zweifel ja."""
+    if not min_free:
+        return True
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import paper_auto as P
+        cfg = P.load_cfg(P.paths())
+        acc = P.api(P.guard(cfg), "GET", "account")
+        free = float(acc["cash"]) - float(acc["equity"]) * float(cfg.get("cash_buffer_pct", 10)) / 100
+        return free >= min_free
+    except Exception:
+        return True
+
+
 def pick(path, top, skip):
     d = json.load(open(path))
     keep = {"breakout_20d", "bull_flag", "reclaim_ma20"}
@@ -87,6 +102,8 @@ def main(argv=None):
     ap.add_argument("--skip", default="", help="Symbole, die nicht beobachtet werden (z. B. Zahlen heute)")
     ap.add_argument("--seen", default="", help="SYM:setup, schon bewertet")
     ap.add_argument("--until", default="11:30")
+    ap.add_argument("--min-free", type=float, default=5000,
+                    help="Signale nur melden, wenn nach der Reserve so viel Bargeld frei ist (0: immer)")
     ap.add_argument("--out", default=os.path.join(ROOT, "trader", "wide_hits.json"))
     a = ap.parse_args(argv)
     skip = {s.strip().upper() for s in a.skip.split(",") if s.strip()}
@@ -105,6 +122,12 @@ def main(argv=None):
                 found += [x for x in signals(s, now) if "%s:%s" % (x["symbol"], x["setup"]) not in seen]
             except Exception as e:  # ein Chart ohne Daten hält die anderen nicht auf
                 print("  %s: %s" % (s, str(e)[:80]), flush=True)
+        if found and not tradable(a.min_free):
+            for x in found:
+                seen.add("%s:%s" % (x["symbol"], x["setup"]))
+                print("%s: Signal %s %s ohne freies Bargeld, nur notiert." % (
+                    now.strftime("%H:%M"), x["symbol"], x["setup"]), flush=True)
+            found = []
         if found:
             json.dump({"at": now.isoformat(), "hits": found}, open(a.out, "w"), indent=2)
             for x in found:
