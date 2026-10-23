@@ -42,4 +42,5 @@ Startwerte aus `trader/config.json`. Ändern nur dort, dann diese Tabelle nachzi
 
 Hier ergänzen, was sich aus [[Gedächtnis/Erkenntnisse/Trading]] ergibt.
 
+- **Mindestschwelle** (2026-10-23): Kein Trade, wenn die Time Machine im Schnitt unter +0,05 R liegt oder dieselbe Regel in der Historie negativ war. Grenzfälle um null sind Münzwürfe mit Kosten.
 - **Risiko abwägen statt ausreizen** (2026-10-22): $1,000 je Trade ist die Obergrenze, kein Ziel. Die Größe richtet sich nach der Qualität des Setups: volles Risiko nur, wenn die Time Machine einen positiven Durchschnitts-R zeigt und die News nicht dagegen sprechen, sonst die Hälfte oder gar nicht.

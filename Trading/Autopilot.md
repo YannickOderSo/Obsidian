@@ -44,7 +44,7 @@ Nur wenn heute weniger als 8 Trades und das Tagesverlustlimit nicht erreicht.
 1. `python3 $S/trader-scanner/scan.py orb --watchlist trader/watchlist.json`, dann `python3 $S/trader-entry/entry.py watchlist`.
 2. Je ausgelöstem Kandidat (bester zuerst): `entry.py check SYM --write`, `exit.py plan --write`, `timemachine.py run --until 15:55 --write`.
 3. **Abwägen** (Regel „Risiko abwägen statt ausreizen“):
-   - Durchschnitts-R der Time Machine ≤ 0 oder Ziel-Quote < Stop-Quote: kein Trade.
+   - Durchschnitts-R der Simulation unter +0,05 oder Historie derselben Regel unter 0: kein Trade (Mindestschwelle seit 2026-10-23, nach dem verlorenen Grenzfall NOW am 2026-10-22).
    - knapp positiv oder News unklar: halbes Risiko (Kopie der Config mit `max_loss_per_trade_usd` 500 als `trader/config.halb.json`, `size.py --config trader/config.halb.json --write`).
    - klar positiv: `size.py --write`.
 4. `python3 $S/trader-risk/check.py`. Nur bei PASS: `python3 $A place --index 1`.
