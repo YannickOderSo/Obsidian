@@ -53,6 +53,11 @@ Nachschlagewerk zum Day Trading, recherchiert am 2026-10-22, jede Notiz mit Quel
 - [[Makro-Termine]] · [[Saisonalität und Kalendereffekte]]
 - [[Marktlage Oktober 2026]]: Momentaufnahme, veraltet schnell
 
+## Prop-Firms und Automatisierung
+
+- [[Prop-Firms und Bot-Architektur]]: geprüfte Einordnung der Gemini-Recherche von Yannick
+- [[Gemini Prop-Trading-Bots]]: Original, ungeprüft
+
 ## Ablauf eines Trades mit Wissen
 
 | Schritt | Skill | Nachlesen |
