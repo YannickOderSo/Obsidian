@@ -58,6 +58,12 @@ Nur wenn heute weniger als 8 Trades und das Tagesverlustlimit nicht erreicht.
 
 `python3 $A sync` holt Fills (Einstieg, Stop, Ziel) ins Protokoll; danach `journal.py write`, bei Stop oder Ziel `journal.py close --exit PREIS`.
 
+## 11:40 und 13:40 Neustart
+
+Hintergrundprozesse enden nach 2 Stunden. Diese Läufe (seit 2026-10-26) holen Fills, frischen das Journal auf und starten neu, was nicht mehr läuft (`pgrep -fa "watch_wide|market_report|paper_auto.py report"`): Beobachter bis 15:30, Marktanalyse bis 16:00, bei offener Position die 15-Minuten-Updates bis 15:55. Fiel die Vorbereitung aus (keine Tagesnotiz von heute, z. B. wegen des Nutzungslimits), holt der 11:40-Lauf sie nach.
+
+Zeiten: Alle Läufe sind in New Yorker Zeit geplant. Deutschland stellt am 2026-10-25 auf Winterzeit um, die USA am 2026-11-01; dazwischen ist New York nur 5 statt 6 Stunden zurück (9:30 NY = 14:30 in Berlin).
+
 ## 15:47 Schluss
 
 1. `python3 $A sync`, dann `python3 $A flatten` (streicht die Bracket-Beine, verkauft den Rest), `python3 $A sync`.

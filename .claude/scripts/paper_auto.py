@@ -247,6 +247,14 @@ def cmd_flatten(a):
     return 0
 
 
+def ny_tz():
+    try:
+        from zoneinfo import ZoneInfo
+        return ZoneInfo("America/New_York")
+    except Exception:
+        return datetime.timezone(datetime.timedelta(hours=-4))
+
+
 def report_text(base):
     """Stand aller offenen Positionen: Kurs, Stop, Ziel, P&L, R. None, wenn nichts offen ist."""
     positions = api(base, "GET", "positions")
@@ -268,7 +276,7 @@ def report_text(base):
                 key = "stop" if l["type"] in ("stop", "stop_limit") else "target"
                 legs.setdefault(o["symbol"], {})[key] = float(l.get("stop_price") or l.get("limit_price"))
     acc = api(base, "GET", "account")
-    now = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=-4)))
+    now = datetime.datetime.now(ny_tz())
     lines = ["📊 **Stand %s NY**" % now.strftime("%H:%M")]
     unreal = sum(float(p["unrealized_pl"]) for p in positions)
     day = float(acc["equity"]) - float(acc["last_equity"])
@@ -308,7 +316,7 @@ def cmd_report(a):
     p = paths()
     base = guard(load_cfg(p))
     hh, mm = map(int, a.until.split(":"))
-    ny = datetime.timezone(datetime.timedelta(hours=-4))
+    ny = ny_tz()
     while True:
         cmd_sync(a)
         text = report_text(base)

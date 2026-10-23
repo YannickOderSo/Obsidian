@@ -22,7 +22,11 @@ import time
 import urllib.request
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-NY = datetime.timezone(datetime.timedelta(hours=-4))  # EDT; bis 2026-11-01
+try:
+    from zoneinfo import ZoneInfo
+    NY = ZoneInfo("America/New_York")
+except Exception:  # ohne Zeitzonendaten: Sommerzeit-Abstand
+    NY = datetime.timezone(datetime.timedelta(hours=-4))
 
 
 def bars(sym):
