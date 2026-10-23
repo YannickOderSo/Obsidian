@@ -275,6 +275,18 @@
       "alpaca_fill_id": "8b827b09-0970-403e-b48b-cd23144e3316",
       "filled_at": "2026-10-23T14:01:34.059375Z",
       "plain": "BUY 50 ISRG at 453.40"
+    },
+    {
+      "at": "2026-10-23T12:20:40-04:00",
+      "date": "2026-10-23",
+      "status": "filled",
+      "symbol": "ZS",
+      "side": "sell",
+      "qty": "136",
+      "price": 249.11,
+      "alpaca_fill_id": "9e2094ab-9e2b-4725-be43-fb86e0758cfc",
+      "filled_at": "2026-10-23T15:57:17.327462Z",
+      "plain": "SELL 136 ZS at 249.11"
     }
   ]
 }
