@@ -175,6 +175,18 @@
       "at": "2026-10-23T09:51:09-04:00",
       "status": "placed",
       "broker_order_id": "1167b2b8-b5e5-4b19-94b3-7937cae55bdb"
+    },
+    {
+      "at": "2026-10-23T09:51:22-04:00",
+      "date": "2026-10-23",
+      "status": "filled",
+      "symbol": "COP",
+      "side": "buy",
+      "qty": "229",
+      "price": 149.64,
+      "alpaca_fill_id": "1167b2b8-b5e5-4b19-94b3-7937cae55bdb",
+      "filled_at": "2026-10-23T13:51:11.061331Z",
+      "plain": "BUY 229 COP at 149.64"
     }
   ]
 }
