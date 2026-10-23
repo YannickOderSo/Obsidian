@@ -137,7 +137,7 @@ def main(argv=None):
     while True:
         text = build(syms, base)
         print(text, flush=True)
-        if a.send:
+        if a.send and "keine Indexdaten" not in text:
             P.notify(text)
         if not a.every:
             return 0
