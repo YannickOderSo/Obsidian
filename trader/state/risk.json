@@ -1,43 +1,46 @@
 {
   "date": "2026-10-23",
-  "now_new_york": "2026-10-23 09:51",
+  "now_new_york": "2026-10-23 10:01",
   "paper": true,
   "results": [
     {
       "index": 1,
-      "symbol": "COP",
+      "symbol": "ISRG",
       "side": "buy",
       "kind": "entry",
-      "amount": "229 shares",
-      "value_usd": 34276.72,
-      "entry_ref": 149.68,
+      "amount": "50 shares",
+      "value_usd": 22621.0,
+      "entry_ref": 452.42,
       "entry_ref_from": "plan",
-      "stop": 147.5,
-      "target": 154.04,
-      "risk_per_share": 2.18,
-      "max_loss": 499.22,
+      "stop": 446.78,
+      "target": 463.7,
+      "risk_per_share": 5.64,
+      "max_loss": 282.0,
       "reward_risk": 2.0,
-      "fingerprint": "b83df02d381291c1",
+      "fingerprint": "8fba74d9e6b9b69d",
       "verdict": "PASS",
       "reasons": [],
       "warnings": [],
       "info": [
-        "entry 149.68 (the plan's entry), stop 147.50, target 154.04: risk 2.18 a share",
-        "max loss $499.22 (limit $1,000), reward:risk 2.00 (min 1.5)",
-        "today before this: 0 of 8 trades, $0 of $2,500 daily loss"
+        "entry 452.42 (the plan's entry), stop 446.78, target 463.70: risk 5.64 a share",
+        "max loss $282 (limit $1,000), reward:risk 2.00 (min 1.5)",
+        "today before this: 2 of 8 trades, $998.34 of $2,500 daily loss"
       ]
     }
   ],
   "pass": 1,
   "block": 0,
-  "warnings": [],
-  "cash_after": 65934.52,
+  "warnings": [
+    "no price for COP: valued at its cost basis $34,267.56",
+    "no price for ZS: valued at its cost basis $32,872.56"
+  ],
+  "cash_after": 10450.12,
   "today": {
-    "orders_placed": 0,
-    "entries_placed": 0,
-    "loss_at_risk": 0.0,
+    "orders_placed": 2,
+    "entries_placed": 2,
+    "loss_at_risk": 998.34,
     "day_trades_5d": null
   },
-  "checked_at": "2026-10-23T13:51:06Z",
+  "checked_at": "2026-10-23T14:01:19Z",
   "orders_file": "trader/orders.json"
 }
