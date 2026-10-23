@@ -1,29 +1,4 @@
 {
-  "cash": 44280.08,
-  "positions": [
-    {
-      "ticker": "COP",
-      "shares": 229.0,
-      "lots": [
-        {
-          "id": "COP-1",
-          "date": "2026-10-23",
-          "shares": 229.0,
-          "cost": 34267.56
-        }
-      ]
-    },
-    {
-      "ticker": "ISRG",
-      "shares": 50.0,
-      "lots": [
-        {
-          "id": "ISRG-1",
-          "date": "2026-10-23",
-          "shares": 50.0,
-          "cost": 22670.0
-        }
-      ]
-    }
-  ]
+  "cash": 101501.88,
+  "positions": []
 }

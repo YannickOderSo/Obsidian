@@ -287,6 +287,30 @@
       "alpaca_fill_id": "9e2094ab-9e2b-4725-be43-fb86e0758cfc",
       "filled_at": "2026-10-23T15:57:17.327462Z",
       "plain": "SELL 136 ZS at 249.11"
+    },
+    {
+      "at": "2026-10-23T15:48:37-04:00",
+      "date": "2026-10-23",
+      "status": "filled",
+      "symbol": "ISRG",
+      "side": "sell",
+      "qty": "50",
+      "price": 451.94,
+      "alpaca_fill_id": "994f32fa-ac09-4298-a732-4c58676b81d7",
+      "filled_at": "2026-10-23T19:48:34.102789Z",
+      "plain": "SELL 50 ISRG at 451.94"
+    },
+    {
+      "at": "2026-10-23T15:48:37-04:00",
+      "date": "2026-10-23",
+      "status": "filled",
+      "symbol": "COP",
+      "side": "sell",
+      "qty": "229",
+      "price": 151.2,
+      "alpaca_fill_id": "ec50bce1-f7d9-4871-9586-ea54ddde8117",
+      "filled_at": "2026-10-23T19:48:35.413426Z",
+      "plain": "SELL 229 COP at 151.20"
     }
   ]
 }
