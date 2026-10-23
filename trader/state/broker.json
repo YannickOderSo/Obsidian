@@ -143,6 +143,38 @@
       "alpaca_fill_id": "ef88e4cc-252e-401d-8136-e9dd050a49da",
       "filled_at": "2026-10-22T19:48:33.293129Z",
       "plain": "SELL 418 WMT at 120.98"
+    },
+    {
+      "at": "2026-10-23T09:51:09-04:00",
+      "date": "2026-10-23",
+      "index": 1,
+      "fingerprint": "b83df02d381291c1",
+      "symbol": "COP",
+      "side": "buy",
+      "qty": "229",
+      "kind": "entry",
+      "max_loss": 499.22,
+      "stop": 147.5,
+      "plain": "BUY 229 COP, market, good for today / stop-loss 147.50 / take-profit 154.04 / max loss about $499.22 if the stop fills at 147.50 (it can fill worse in a fast market)",
+      "status": "approved",
+      "reply": "autonom: Paper-Experiment, Freigabe des Nutzers vom 2026-10-22",
+      "paper": true,
+      "broker": "alpaca"
+    },
+    {
+      "date": "2026-10-23",
+      "index": 1,
+      "fingerprint": "b83df02d381291c1",
+      "symbol": "COP",
+      "side": "buy",
+      "plain": "BUY 229 COP, market, good for today / stop-loss 147.50 / take-profit 154.04 / max loss about $499.22 if the stop fills at 147.50 (it can fill worse in a fast market)",
+      "qty": "229",
+      "kind": "entry",
+      "max_loss": 499.22,
+      "stop": 147.5,
+      "at": "2026-10-23T09:51:09-04:00",
+      "status": "placed",
+      "broker_order_id": "1167b2b8-b5e5-4b19-94b3-7937cae55bdb"
     }
   ]
 }
