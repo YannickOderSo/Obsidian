@@ -55,6 +55,7 @@ Nachschlagewerk zum Day Trading, recherchiert am 2026-10-22, jede Notiz mit Quel
 
 ## Prop-Firms und Automatisierung
 
+- [[Funded Accounts]]: Hub der eigenen Recherche (Kauf, Firmen nach Markt, Schnittstellen, Anbindung des Bots, Recht und Steuern)
 - [[Prop-Firms und Bot-Architektur]]: geprüfte Einordnung der Gemini-Recherche von Yannick
 - [[Gemini Prop-Trading-Bots]]: Original, ungeprüft
 
