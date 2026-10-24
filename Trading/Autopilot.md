@@ -1,7 +1,7 @@
 ---
 typ: ablauf
 erstellt: 2026-10-22
-aktualisiert: 2026-10-22
+aktualisiert: 2026-10-24
 tags:
   - trading
 ---
@@ -12,7 +12,7 @@ Ablauf der geplanten Läufe im autonomen Paper-Experiment ([[2026-10-22 Autonome
 
 ## Immer zuerst
 
-1. `git pull` auf dem Arbeitszweig, [[Gedächtnis/Erkenntnisse/Trading]] und die eigenen Regeln lesen.
+1. `git pull` auf dem Arbeitszweig, dann `git fetch origin main && git merge origin/main` (holt, was andere Sitzungen nach `main` gebracht haben; Konflikte in Notizen zusammenführen, nichts verwerfen). Danach [[Gedächtnis/Erkenntnisse/Trading]] und die eigenen Regeln lesen.
 2. `python3 $A status`. Ist heute kein Handelstag (Feiertag, Wochenende), nichts tun außer einer Zeile in der Tagesnotiz.
 3. Blockiert die Umgebung eine Datenquelle: nichts nachbauen, Lauf mit Vermerk beenden (Adressen im README, „In einer Cloud-Sitzung“).
 
@@ -71,6 +71,7 @@ Zeiten: Alle Läufe sind in New Yorker Zeit geplant. Deutschland stellt am 2026-
 3. Reflexion je Trade: Was war der Plan, was ist passiert, stimmte die Abwägung? `journal.py stats --write`.
 4. Erst ein **Muster** über mehrere Trades kommt nach [[Gedächtnis/Erkenntnisse/Trading]]; daraus abgeleitete Regeln nach [[Trading/Regeln]] (Limits in der Config nur mit dem Nutzer).
 5. Committen und pushen.
+6. **Nach `main` bringen**, damit Yannick die Trades in Obsidian sieht (Wunsch des Nutzers 2026-10-24): beide Testläufe (`python3 -m unittest discover -s .claude/tests` und `-s .claude/tests/day-trader`) müssen grün sein, dann Pull Request vom Arbeitszweig nach `main` anlegen und selbst mergen (erlaubt laut [[Kern]]). Sind Tests rot oder gibt es einen Konflikt, nicht mergen, sondern den Grund in die Tagesnotiz und per Discord melden. Kein Force-Push, kein direkter Push auf `main`.
 
 ## Discord
 

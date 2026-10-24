@@ -24,6 +24,7 @@ Eine Zeile je Notiz. Neue Notizen hier eintragen (Skill `gedaechtnis`).
 ## Erkenntnisse
 
 - [[Gedächtnis/Erkenntnisse/Trading|Trading]]: Lehren aus dem Journal
+- [[Alpaca unter Windows]]: Einrichtung des Alpaca-Servers in Claude Desktop, Stolpersteine
 
 ## Trading
 
