@@ -1,6 +1,6 @@
 ---
 typ: index
-aktualisiert: 2026-10-23
+aktualisiert: 2026-10-24
 ---
 
 # Index
@@ -30,3 +30,4 @@ Eine Zeile je Notiz. Neue Notizen hier eintragen (Skill `gedaechtnis`).
 - [[Trading/Übersicht]]: alle Trades und Statistik
 - [[Trading/Wissen/Übersicht]]: Nachschlagewerk mit Quellen (37 Notizen: Strategien, Muster, Risiko, Markt, News), recherchiert 2026-10-22
 - [[Prop-Firms und Bot-Architektur]]: Gemini-Recherche von Yannick geprüft (Prop-Firms, Bot-Anbindung, Regeln); Original in [[Gemini Prop-Trading-Bots]]
+- [[Funded Accounts]]: eigene Recherche zu Prop-Firms für den Bot: wie kaufen, wo (Aktien, Futures, CFD, Krypto), wie anbinden, wann bereit (9 Notizen)
