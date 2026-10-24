@@ -144,7 +144,7 @@ Fazit: Das Setup passt fachlich am besten zu **Trade The Pool**, technisch aber 
 - **Repo-Regel bleibt:** Mit echtem Geld, und eine bezahlte Challenge ist echtes Geld, keine Order ohne Yannicks ausdrückliches Ja. Ein vollautonomer Bot auf einem gekauften Konto widerspricht der heutigen Regel in `CLAUDE.md`; das wäre eine eigene Entscheidung von Yannick.
 - **Limits wären enger.** Für ein $100k-Konto bei Trade The Pool hieße das z. B. höchstens $600 Risiko je Trade und $2.000 am Tag statt $1.000 und $2.500. Vorher im Paper-Konto mit diesen Limits testen, siehe [[Tageslimits und Regelwerk]].
 - **Erst Nachweis, dann Kauf:** fünf Trades reichen nicht; siehe [[Wie viele Day Trader gewinnen]] und [[Backtesting und Overfitting]].
-- Kein Anbieter hier unterliegt der [[Pattern Day Trader Regel]], weil alles simuliert ist. Steuern: [[Steuern in Deutschland]], [[Recht Steuern und Risiken]].
+- Die [[Pattern Day Trader Regel]] gilt für Margin-Konten bei US-Brokern; die Prüf- und Funded-Konten hier sind simuliert, eine PDT-Grenze nennt keiner der Anbieter. Steuern: [[Steuern in Deutschland]], [[Recht Steuern und Risiken]].
 
 ## Quellen
 

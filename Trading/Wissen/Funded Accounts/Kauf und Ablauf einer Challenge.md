@@ -28,7 +28,7 @@ Zurück zum Hub: [[Funded Accounts]] · Grundlage: [[Prop-Firms und Bot-Architek
 | FTMO | „all accounts we provide to our clients are demo accounts with fictitious funds“; „all trading is processed on simulated accounts; our clients do not trade with real capital“ (FAQ) |
 | Topstep | Statistiken umfassen „both a simulated trading environment and a live trading environment“; das Express Funded Account ist simuliert, nur **0,71 %** der Express-Händler wurden 2025 in ein Live Funded Account übernommen |
 
-Das heißt: Auch das „Funded Account“ ist meist eine Simulation. Echte Orders an einer Börse gibt es nur bei wenigen Firmen und dort meist erst in einer späten Stufe (Topstep: Live Funded Account nach Auswahl durch das Risk Team).
+Das heißt: Auch das „Funded Account“ ist meist eine Simulation. Echte Orders an einer Börse gibt es nur bei wenigen Firmen und dort meist erst in einer späten Stufe (Topstep: Live Funded Account nach Auswahl durch das Risk Team). **Für Deutschland gibt es das bei Topstep nicht:** Das Help Center führt Deutschland unter „Countries Eligible for an XFA — Not LFA“; die Terms of Use sagen für solche Länder, das Funded Account bleibe „exclusively in a simulated trading environment“.
 
 ## Die Modelle
 
@@ -169,7 +169,8 @@ Gewinnschwelle: p × q ≈ $630 / $3.030 ≈ **21 %**. Ein Bot müsste also etwa
 ## Für diesen Bot
 
 - **Markt passt nicht direkt:** Der Bot handelt US-Aktien long über Alpaca. FTMO ist CFD/Forex auf MT4/MT5/cTrader, Topstep ist Futures. Ein ORB auf Aktien wird dort zu einem ORB auf CFDs oder Futures (z. B. Index-Futures) mit anderen Kosten und Zeiten. Welche Firmen Aktien anbieten: [[Prop-Firms für US-Aktien]], [[Prop-Firms für Futures]], [[Prop-Firms für CFD und Forex]].
-- **Cloud-Betrieb kann verboten sein:** Topstep schreibt in der API-Beschreibung, dass alle Orders vom **eigenen Gerät** kommen müssen und VPS, VPN und Remote-Server verboten sind („your server can watch and record, but it cannot trade“); Live-Konten sind über die API gar nicht erreichbar. Der Autopilot in Claude-Code-Cloud-Sitzungen wäre dort ein Regelverstoß. Vor jedem Kauf genau diese Frage schriftlich klären.
+- **Cloud-Betrieb kann verboten sein:** Topstep schreibt in der API-Beschreibung, dass alle Orders vom **eigenen Gerät** kommen müssen und VPS, VPN und Remote-Server verboten sind („your server can watch and record, but it cannot trade“); Live-Konten sind über die API gar nicht erreichbar. Die Terms of Use (Stand 21.09.2026) sagen: „Using any VPN or VPS on Accounts is strictly prohibited“. Der Autopilot in Claude-Code-Cloud-Sitzungen wäre dort ein Regelverstoß. Vor jedem Kauf genau diese Frage schriftlich klären.
+- **FTMO-Klauseln mit Bezug zum ORB:** Die Liste der verbotenen Praktiken nennt „gap trading“, also Trades zu angesetzten Unternehmenszahlen oder Makro-Terminen und „two hours or less before a relevant financial market is closed for at least two hours“. Nach dem Wortlaut könnten Einstiege in Aktien-CFDs ab etwa 14:00 NY darunter fallen; das Einstiegsfenster des Bots reicht bis 15:30. Vor dem Kauf bei FTMO nachfragen. Details: [[Recht Steuern und Risiken]].
 - **Limits übersetzen:** $100.000 Paper-Konto mit $1.000 Verlust je Trade und $2.500 je Tag sind 1 % und 2,5 %. Das liegt unter FTMOs 5 % (2-Step) bzw. 3 % (1-Step) Tagesgrenze, aber das Paper-Limit gilt am Stop, die Prop-Grenze auf die Equity inklusive Slippage. Bei 1-Step blieben bei zwei Verlusttrades und schlechter Ausführung wenig Reserve.
 - **Kostenloser Test zuerst:** FTMO Free Trial (kostenlos, gleiche Regeln) und Topstep Practice Account erlauben, die Anbindung und die Regeln ohne Gebühr zu prüfen.
 - **Mit 5 geschlossenen Trades** ist p nicht schätzbar; die Rechnung oben bleibt bis auf Weiteres eine Wette auf den Durchschnitt, und der ist negativ.
@@ -199,6 +200,9 @@ Offizielle Seiten der Firmen:
 - Topstep Help Center: Pricing and Payment Questions – https://help.topstep.com/en/articles/14289835-topstep-pricing-and-payment-questions
 - Topstep Help Center: Back2Funded – https://help.topstep.com/en/articles/12060405-back2funded-rules-guidelines-and-how-it-works
 - Topstep Help Center: TopstepX API Access – https://help.topstep.com/en/articles/11187768-topstepx-api-access
+- Topstep Help Center: Am I Eligible to Trade with Topstep? – https://help.topstep.com/en/articles/8284116-am-i-eligible-to-trade-with-topstep
+- Topstep Terms of Use (Stand 21.09.2026) – https://www.topstep.com/terms-of-use
+- FTMO: Forbidden Trading Practices – https://ftmo.com/en/forbidden-trading-practices/
 - Topstep: Instant Payouts (99,26 %, $1,4 Mrd.) – https://www.topstep.com/instant-payouts
 
 Behörden:
