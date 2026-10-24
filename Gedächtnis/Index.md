@@ -19,6 +19,7 @@ Eine Zeile je Notiz. Neue Notizen hier eintragen (Skill `gedaechtnis`).
 ## Entscheidungen
 
 - [[2026-10-21 Obsidian als Gedächtnis]]: Vault als Langzeitgedächtnis für Claude, Day Trading nur mit Paper Trading
+- [[2026-10-22 Autonomes Paper Trading]]: Claude handelt das Paper-Konto selbst, lernt aus dem Journal
 
 ## Erkenntnisse
 
@@ -27,6 +28,7 @@ Eine Zeile je Notiz. Neue Notizen hier eintragen (Skill `gedaechtnis`).
 ## Trading
 
 - [[Trading/Regeln]]: Limits und Ablauf
+- [[Trading/Autopilot]]: Ablauf der geplanten Läufe im Paper-Experiment
 - [[Trading/Übersicht]]: alle Trades und Statistik
 - [[Trading/Wissen/Übersicht]]: Nachschlagewerk mit Quellen (37 Notizen: Strategien, Muster, Risiko, Markt, News), recherchiert 2026-10-22
 - [[Prop-Firms und Bot-Architektur]]: Gemini-Recherche von Yannick geprüft (Prop-Firms, Bot-Anbindung, Regeln); Original in [[Gemini Prop-Trading-Bots]]

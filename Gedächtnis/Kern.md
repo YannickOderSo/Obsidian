@@ -20,7 +20,7 @@ Wird in jeder Sitzung geladen. Höchstens 40 Zeilen, Details in den verlinkten N
 ## Laufend
 
 - [[Neuzeit]]: Website-Prototyp, Repo `YannickOderSo/Neuzeit`.
-- [[Trading/Regeln|Day Trading]] mit Spielgeld (Paper Trading) über die Day-Trader-Skills, Journal in `Trading/`.
+- [[Trading/Regeln|Day Trading]] mit Spielgeld (Paper Trading) über die Day-Trader-Skills, Journal in `Trading/`. Seit 2026-10-22 handelt Claude das Paper-Konto selbst ([[Trading/Autopilot]], vier geplante Läufe je Handelstag).
 
 ## Wo was steht
 
