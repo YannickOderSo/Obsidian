@@ -15,6 +15,7 @@ Eine Zeile je Notiz. Neue Notizen hier eintragen (Skill `gedaechtnis`).
 ## Projekte
 
 - [[Neuzeit]]: Beratung für Change-Management, Website-Prototyp
+- [[LAURA]]: Trading-Cockpit von Yannick mit Gemini (Repo Overview-Obsidian), bisher reine Simulation
 
 ## Entscheidungen
 
